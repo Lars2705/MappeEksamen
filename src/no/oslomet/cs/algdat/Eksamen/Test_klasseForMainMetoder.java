@@ -22,6 +22,7 @@ public class Test_klasseForMainMetoder {
  */
 
            //oppgave 2
+
         Integer[] a = {4,7,2,9,4,10,8,7,4,6};
         EksamenSBinTre<Integer> tre = new EksamenSBinTre<>(Comparator.naturalOrder());
         for (int verdi : a) tre.leggInn(verdi);
