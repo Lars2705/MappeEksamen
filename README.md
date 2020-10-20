@@ -16,5 +16,7 @@ Se oblig-tekst for alle krav, og husk spesielt på følgende:
 
 Vi har brukt git til å dokumentere arbeidet vårt. Jeg har 16 commits totalt, og hver logg-melding beskriver det jeg har gjort av endringer.
 
+Jeg har lagret den opprinnelige kildekoden ved bruk av github detoskope
+
 * Oppgave 1: Løste ved å implementere ...
 * Oppgave 2: ...
