@@ -96,8 +96,8 @@ public class EksamenSBinTre<T> {
 
             // p er nå null, dvs. ute av treet, q er den siste vi passerte
 
-            p = new Node<>(verdi, q);                  // oppretter en ny node
-                                                       //referer til at q er forelder i hver node
+            p = new Node<>(verdi,null,null,q);                  // oppretter en ny node
+                                                       //referer til at q er forelder i hver node som oprettes
 
             if (q == null) rot = p;                  // p blir rotnode
             else if (cmp < 0) q.venstre = p;         // venstre barn til q
