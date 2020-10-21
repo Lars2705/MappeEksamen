@@ -6,12 +6,26 @@ public class Test_klasseForMainMetoder {
 
     public static void main(String args[]){
 
-        /*
-        Oppgave 0
+
 
         EksamenSBinTre<String> tre = new EksamenSBinTre<>(Comparator.naturalOrder());
         System.out.println(tre.antall()); // Utskrift: 0
+         /*
+        Oppgave 0
+
+         EksamenSBinTre<Integer> tre = new EksamenSBinTre<>(Comparator.naturalOrder());
+        System.out.println(tre.antall()); //utskrift 0
+
+         EksamenSBinTre<Character> tre = new EksamenSBinTre<>(Comparator.naturalOrder());
+        System.out.println(tre.antall()); //utskrift 0
+
+
          */
+
+
+
+
+
 /*
         Oppgave 1
 
@@ -22,7 +36,7 @@ public class Test_klasseForMainMetoder {
  */
 
            //oppgave 2
-
+/*
         Integer[] a = {4,7,2,9,4,10,8,7,4,6};
         EksamenSBinTre<Integer> tre = new EksamenSBinTre<>(Comparator.naturalOrder());
         for (int verdi : a) tre.leggInn(verdi);
@@ -33,6 +47,8 @@ public class Test_klasseForMainMetoder {
         System.out.println(tre.antall(7));     // Utskrift: 2
         System.out.println(tre.antall(10));    // Utskrift: 1
 
+
+ */
 
 
 
