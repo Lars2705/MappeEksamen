@@ -7,11 +7,12 @@ public class Test_klasseForMainMetoder {
     public static void main(String args[]){
 
 
+         /*
+        Oppgave 0
 
         EksamenSBinTre<String> tre = new EksamenSBinTre<>(Comparator.naturalOrder());
         System.out.println(tre.antall()); // Utskrift: 0
-         /*
-        Oppgave 0
+
 
          EksamenSBinTre<Integer> tre = new EksamenSBinTre<>(Comparator.naturalOrder());
         System.out.println(tre.antall()); //utskrift 0
