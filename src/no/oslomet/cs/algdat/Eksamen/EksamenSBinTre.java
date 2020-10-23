@@ -149,10 +149,9 @@ public class EksamenSBinTre<T> {
         //tatt utgangspunkt i kildekoden 5.1.7 h) fra kompendie
 
         /*
-        public T førstPostorden()
+      public T førstPostorden()
   {
     if (tom()) throw new NoSuchElementException("Treet er tomt!");
-
     Node<T> p = rot;
     while (true)
     {
@@ -162,9 +161,30 @@ public class EksamenSBinTre<T> {
     }
   }
          */
+        //p blir definert som rotnoden q
+
+        if(p==null){ // hvis p noden er tom
+
+            throw new NoSuchElementException("Da er hele treet tomt"); //vi har da ikke et tree fordi for oss er:
+                                                                      // P = rotnoden som vil si at treet er tomt
+
+        }
+        while(true){
+            if(p.venstre != null){ // definerer at hvis venstre noden til foreldrenoden ikke er tom
+                p = p.venstre; // så er p = venstre noden til foreldre noden
+
+            }else if(p.høyre != null){ // eller hvis høyre noden til foreldrenoden ikke er tom
+                p = p.høyre; //så setter vi p = foreldrenoden sin høyre node
+            }else{ //
+                return p; //eller hvis venstre noden eller høyre noden er null - tom så returneres kun rotnoden tilbake som her er (p)
+            }
+        }
 
 
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+
+
+
+     //   throw new UnsupportedOperationException("Ikke kodet ennå!");
 
     }
 
