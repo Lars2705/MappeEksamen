@@ -203,7 +203,23 @@ Hvis p ikke er enebarn (dvs. f.høyre er ikke null),
  så er den neste den noden som kommer først i postorden i subtreet med f.høyre som rot.
          */
 
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        Node<T> forelder = p.forelder; //definerer at forelder er foreldre noden til p
+
+        if(p.forelder == null){ //hvis p ikke har forelder
+            //   p = null; // da har ikke p en neste og vi returnere 0
+
+        }else if(p == forelder.høyre){ //hvis p er høyre barn til sin forelder (q)
+            p = forelder; // så er forelder (q) den neste
+
+        }else if(forelder.venstre == p){ //else hvis p er det venstre barn til foreldre noden (q)
+            if(forelder.høyre==null) { // hvis høyre noden til foreldre q er tom så har vi kun en venstre node for p
+                p = forelder; // da er foreldre den neste node for p. Siden høyre noden for q er tom
+            }
+        }
+        return p;
+
+
+       // throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
 
     public void postorden(Oppgave<? super T> oppgave) {
