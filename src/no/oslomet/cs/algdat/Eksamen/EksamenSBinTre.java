@@ -249,13 +249,22 @@ Hvis p ikke er enebarn (dvs. f.høyre er ikke null),
         throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
 
-    public void postordenRecursive(Oppgave<? super T> oppgave) {
-        postordenRecursive(rot, oppgave);
+    public void postordenRecursive(Oppgave<? super T> oppgave) { // er den offentlige metoden som kaller hjelpemetoden
+        postordenRecursive(rot, oppgave); //sjekker om treet vil være tomt
     }
 
     private void postordenRecursive(Node<T> p, Oppgave<? super T> oppgave) {
 
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        /*
+        Tar utganspunkt fra kildekoden i kompendie 5.1.7 a) for å implementere en privat hjelpemetode som utfører rekursjonen
+         */
+
+        if (p.venstre != null) postordenRecursive(p.venstre,oppgave);  // til venstre barn
+        if (p.høyre != null) postordenRecursive(p.høyre,oppgave);      // til høyre barn
+
+        oppgave.utførOppgave(p.verdi);//metoden oppgave kaller på interface utføroppgave
+
+        // throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
 
     public ArrayList<T> serialize() {
