@@ -6,6 +6,7 @@ public class Test_klasseForMainMetoder {
 
     public static void main(String args[]){
 
+        
 
          /*
         Oppgave 0

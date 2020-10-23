@@ -106,7 +106,7 @@ public class EksamenSBinTre<T> {
 
             antall++;                                // én verdi mer i treet
             return true;                             // vellykket innlegging
-        };
+        }
 
 
     public boolean fjern(T verdi) {
@@ -145,14 +145,39 @@ public class EksamenSBinTre<T> {
     }
 
     private static <T> Node<T> førstePostorden(Node<T> p) {
+
+        //tatt utgangspunkt i kildekoden 5.1.7 h) fra kompendie
+
+        /*
+        public T førstPostorden()
+  {
+    if (tom()) throw new NoSuchElementException("Treet er tomt!");
+
+    Node<T> p = rot;
+    while (true)
+    {
+      if (p.venstre != null) p = p.venstre;
+      else if (p.høyre != null) p = p.høyre;
+      else return p.verdi;
+    }
+  }
+         */
+
+
         throw new UnsupportedOperationException("Ikke kodet ennå!");
+
     }
 
     private static <T> Node<T> nestePostorden(Node<T> p) {
+
         throw new UnsupportedOperationException("Ikke kodet ennå!");
+
     }
 
     public void postorden(Oppgave<? super T> oppgave) {
+
+
+
         throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
 
@@ -161,6 +186,7 @@ public class EksamenSBinTre<T> {
     }
 
     private void postordenRecursive(Node<T> p, Oppgave<? super T> oppgave) {
+
         throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
 
