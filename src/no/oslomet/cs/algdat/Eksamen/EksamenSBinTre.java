@@ -252,11 +252,22 @@ public class EksamenSBinTre<T> {
     }
 
     public void postordenRecursive(Oppgave<? super T> oppgave) { // er den offentlige metoden som kaller hjelpemetoden
-        postordenRecursive(rot, oppgave); //sjekker om treet vil være tomt
+        postordenRecursive( rot, oppgave); //sjekker om treet vil være tomt - (vis da rot veriden p er tom)
     }
 
     private void postordenRecursive(Node<T> p, Oppgave<? super T> oppgave) {
         // Tar utganspunkt fra kildekoden i kompendie 5.1.7 a) for å implementere en privat hjelpemetode som utfører rekursjonen
+
+        /*
+          oppgave.utførOppgave(p.verdi);                       // utfører oppgaven
+
+    if (p.venstre != null) preorden(p.venstre,oppgave);  // til venstre barn
+    if (p.høyre != null) preorden(p.høyre,oppgave);      // til høyre barn
+
+  }kaller på metoden postoderdenrecursive i stedet for preorden metoden til venstre og høyre barn nodene
+    postoderdenrecursive blir da koblet til metoden oppgave som kaller på interfacet utføroppgave
+
+         */
 
 
         if (p.venstre != null) postordenRecursive(p.venstre,oppgave);  // til venstre barn
