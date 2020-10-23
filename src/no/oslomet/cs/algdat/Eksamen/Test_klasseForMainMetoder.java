@@ -6,7 +6,13 @@ public class Test_klasseForMainMetoder {
 
     public static void main(String args[]){
 
-        
+        /*
+    For at det skal virke må grensesnittet Beholder være tilgjengelige. Lag så noen instanser av
+    klassen EksamenSBinTre. Sjekk at det ikke gir noen syntaksfeil (eller kjørefeil).
+    Bruk f.eks. både Integer, Character og String som datatyper.
+    Da kan du bruke en «naturlig» komparator i konstruktøren. Dvs. slik for datatypen String:
+
+         */
 
          /*
         Oppgave 0
@@ -23,9 +29,6 @@ public class Test_klasseForMainMetoder {
 
 
          */
-
-
-
 
 
 /*
