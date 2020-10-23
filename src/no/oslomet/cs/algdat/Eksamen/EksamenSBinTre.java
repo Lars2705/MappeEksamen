@@ -83,6 +83,18 @@ public class EksamenSBinTre<T> {
 
     //Kildekoden er hentet fra kompendie Programkode 5.2 3 a) og har lagt til forlder noden nå er q
     public boolean leggInn(T verdi) {
+
+        /* - referanse om kildekoden hentet fra programkode 5.2.3 a)
+        brukes to nodereferanser p og q. Referansen p starter i rotnoden.
+        Den flyttes så nedover i treet - til venstre når verdi er mindre enn nodeverdien og til høyre ellers.
+        Sammenligningene utføres ved hjelp av compare-metoden til komparatoren comp.
+         Referansen q skal ligge et nivå over p, dvs. være forelder til p.
+          Når p blir null, vil q være den siste noden som ble passert.
+           Dermed skal verdi legges inn som et barn til q.
+           Den siste verdien som compare-metoden returnerte, forteller om det skal være venstre eller høyre barn.
+            Hvis treet i utgangspunktet var tomt, lages en rotnode.
+         */
+
             Objects.requireNonNull(verdi, "Ulovlig med nullverdier!");
 
             Node<T> p = rot, q = null;               // p starter i roten
