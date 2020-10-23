@@ -256,7 +256,7 @@ public class EksamenSBinTre<T> {
     }
 
     private void postordenRecursive(Node<T> p, Oppgave<? super T> oppgave) {
-        // Tar utganspunkt fra kildekoden i kompendie 5.1.7 a) for å implementere en privat hjelpemetode som utfører rekursjonen
+        // Tar ibruk kildekoden i kompendie 5.1.7 a) for å implementere en privat hjelpemetode som utfører rekursjonen
 
         /*
           oppgave.utførOppgave(p.verdi);                       // utfører oppgaven
