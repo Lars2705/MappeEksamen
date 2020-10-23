@@ -251,29 +251,35 @@ public class EksamenSBinTre<T> {
         throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
 
-    public void postordenRecursive(Oppgave<? super T> oppgave) { // er den offentlige metoden som kaller hjelpemetoden
+    public void postordenRecursive(Oppgave<? super T> oppgave) { // Er den offentlige metoden som kaller hjelpemetoden
         postordenRecursive( rot, oppgave); //sjekker om treet vil være tomt - (vis da rot veriden p er tom)
     }
 
     private void postordenRecursive(Node<T> p, Oppgave<? super T> oppgave) {
         // Tar ibruk kildekoden i kompendie 5.1.7 a) for å implementere en privat hjelpemetode som utfører rekursjonen
 
-        /*
+        /*Fra kompendie 5.1.7 a)
+
           oppgave.utførOppgave(p.verdi);                       // utfører oppgaven
 
-    if (p.venstre != null) preorden(p.venstre,oppgave);  // til venstre barn
-    if (p.høyre != null) preorden(p.høyre,oppgave);      // til høyre barn
+      if (p.venstre != null) preorden(p.venstre,oppgave);  // til venstre barn
+      if (p.høyre != null) preorden(p.høyre,oppgave);      // til høyre barn
+  }
+  */
+    //kaller på metoden postoderdenrecursive i stedet for preorden metoden(5.1.7 a fra kompendie)
+    //postoderdenrecursive blir da koblet til Interfacet oppgave som kaller på den abstracte metoden utføroppgave
 
-  }kaller på metoden postoderdenrecursive i stedet for preorden metoden til venstre og høyre barn nodene
-    postoderdenrecursive blir da koblet til metoden oppgave som kaller på interfacet utføroppgave
 
-         */
+        if (p.venstre != null){
+            postordenRecursive(p.venstre,oppgave);
+            //hvis venstre node verdi til (p-rot)/foreldre noden ikke er null, så vil vi i en postorden rekkefølge traverere treet fra venstre barn node
+        }
+        if (p.høyre != null) {
+            postordenRecursive(p.høyre,oppgave);
+            //hvis høyre node verdi til p-rot ikke er null, så skal vi traversere videre til høyre barn og deretter til forelder noden
+        }
 
-
-        if (p.venstre != null) postordenRecursive(p.venstre,oppgave);  // til venstre barn
-        if (p.høyre != null) postordenRecursive(p.høyre,oppgave);      // til høyre barn
-
-        oppgave.utførOppgave(p.verdi);//metoden oppgave kaller på interface utføroppgave
+        oppgave.utførOppgave(p.verdi);//interface oppgave kaller på metoden abstract metoden utføroppgave
 
 
         /*
