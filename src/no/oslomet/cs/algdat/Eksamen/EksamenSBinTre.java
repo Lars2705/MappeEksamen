@@ -135,26 +135,34 @@ public class EksamenSBinTre<T> {
     }
 
     public int antall(T verdi) {
+
         //har tatt ibruk kildekoden fra kompendie. Innenfor ukeoppgave 9 oppgave 5.2.6 b)
+
         Node<T> p = rot; //definerer p som rot noden - altså første noden
 
-        int antallLike_verider = 0; //definerer variabel som skal plusses for hver like node verdi
+        int antallLike_NodeVerdier = 0; //definerer variabel som skal plusses for hver like node verdi
 
-        while (p != null) //hvis p - rot noden ikke er tom
-        {
-            int cmp = comp.compare(verdi,p.verdi); //hvis verdien somn sammenlinges med p rot node verdi er mindre
-            if (cmp < 0) p = p.venstre; //så settes verdien inn som venstre node
-            else if(cmp>0){ //hvis nåværende verdi som sammenlignes med p rot verdien er større
+        while (!(p == null)){ //hvis p - rot noden ikke er tom
+
+            int compare = comp.compare(verdi,p.verdi); //hvis verdien somn sammenlinges med p rot node verdi er mindre
+
+            if (compare < 0){
+
+                p = p.venstre; //så settes verdien inn som venstre node
+
+            } else if(compare>0){ //hvis nåværende verdi som sammenlignes med p rot verdien er større
+
                 p = p.høyre; //så settes verdien inn som høyre node
+            }
+            else{ //hvis compare verdiene er like for den nåværende verdien vi sammenlinger med og verdien i p noden
 
-            }else{ //hvis compare verdiene er like for den nåværende verdien vi sammenlinger med og verdien i p noden
-
-               antallLike_verider++; //Det er tillatt med duplikater og det betyr at en verdi kan forekomme flere ganger.
+                antallLike_NodeVerdier++; //Det er tillatt med duplikater og det betyr at en verdi kan forekomme flere ganger.
                //vi plusser da for hver node som har lik verdi
                 p=p.høyre; //setter den like nodeverdien til høyre for forldrenoden vi er på (P)
             }
+
         }
-        return antallLike_verider; //returnere antall forekomster av verdi i treet.
+        return antallLike_NodeVerdier; //returnere antall forekomster av verdi i treet.
     }
 
     public void nullstill() {
@@ -164,7 +172,6 @@ public class EksamenSBinTre<T> {
     private static <T> Node<T> førstePostorden(Node<T> p) {
 
         //tatt utgangspunkt i kildekoden 5.1.7 h) fra kompendie
-
         /*
       public T førstPostorden()
   {
@@ -184,7 +191,6 @@ public class EksamenSBinTre<T> {
 
             throw new NoSuchElementException("Da er hele treet tomt"); //vi har da ikke et tree fordi for oss er:
                                                                       // P = rotnoden som vil si at treet er tomt
-
         }
         while(true){
             if(p.venstre != null){ // definerer at hvis venstre noden til foreldrenoden ikke er tom
@@ -196,11 +202,6 @@ public class EksamenSBinTre<T> {
                 return p; //eller hvis venstre noden eller høyre noden er null - tom så returneres kun rotnoden tilbake som her er (p)
             }
         }
-
-
-
-
-
      //   throw new UnsupportedOperationException("Ikke kodet ennå!");
 
     }
@@ -239,9 +240,6 @@ Hvis p ikke er enebarn (dvs. f.høyre er ikke null),
 
         // throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
-
-
-
 
 
     public void postorden(Oppgave<? super T> oppgave) {
