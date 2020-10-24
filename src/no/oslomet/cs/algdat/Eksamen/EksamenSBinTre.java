@@ -95,36 +95,36 @@ public class EksamenSBinTre<T> {
             Hvis treet i utgangspunktet var tomt, lages en rotnode.
          */
 
-            Objects.requireNonNull(verdi, "Ulovlig med nullverdier!");
+        Objects.requireNonNull(verdi, "Ulovlig med nullverdier!");
 
-            Node<T> p = rot;
-            Node<T> q = null;               // p starter i roten
-            int compare = 0;                             // hjelpevariabel
+        Node<T> p = rot;
+        Node<T> q = null;               // p starter i roten
+        int compare = 0;                             // hjelpevariabel
 
-            while (p != null) {      // fortsetter til p er ute av treet
+        while (p != null) {      // fortsetter til p er ute av treet
 
-                q = p;                                 // q er forelder til p
-                compare = comp.compare(verdi,p.verdi);     // bruker komparatoren
-                p = compare < 0 ? p.venstre : p.høyre;     // flytter p
-            }
+            q = p;                                 // q er forelder til p
+            compare = comp.compare(verdi, p.verdi);     // bruker komparatoren
+            p = compare < 0 ? p.venstre : p.høyre;     // flytter p
+        }
 
-            // p er nå null, dvs. ute av treet, q er den siste vi passerte
+        // p er nå null, dvs. ute av treet, q er den siste vi passerte
 
-            p = new Node<>(verdi,null,null,q);                  // oppretter en ny node
-                                                       //referer til at q er forelder i hver node som oprettes
+        p = new Node<>(verdi, null, null, q);                  // oppretter en ny node
+        //referer til at q er forelder i hver node som oprettes
 
-            if (q == null){
-                rot = p;                  // p blir rotnode
+        if (q == null) {
+            rot = p;                  // p blir rotnode
 
-            } else if (compare < 0){
-                q.venstre = p;         // venstre barn til q
+        } else if (compare < 0) {
+            q.venstre = p;         // venstre barn til q
 
-            } else {
-                q.høyre = p;                        // høyre barn til q
-            }
+        } else {
+            q.høyre = p;                        // høyre barn til q
+        }
 
-            antall++;                                // én verdi mer i treet
-            return true;                             // vellykket innlegging
+        antall++;                                // én verdi mer i treet
+        return true;                             // vellykket innlegging
 
         /*
         // Forelder må få riktig verdi ved hver innlegging, men forelder skal være null i rotnoden.
@@ -134,7 +134,7 @@ public class EksamenSBinTre<T> {
         // Sjekk at følgende kode er feilfri (ikke kaster noen unntak):
          */
 
-        }
+    }
 
 
     public boolean fjern(T verdi) {
@@ -151,23 +151,23 @@ public class EksamenSBinTre<T> {
 
         int antallLike_NodeVerdier = 0; //definerer variabel som skal plusses for hver like node verdi
 
-        while (!(p == null)){ //hvis p - rot noden ikke er tom
-            int compare = comp.compare(verdi,p.verdi); //hvis verdien somn sammenlinges med p rot node verdi er mindre
+        while (!(p == null)) { //hvis p - rot noden ikke er tom
+            int compare = comp.compare(verdi, p.verdi); //comparer verdiene vi har med p rot node verdien - Altså om verdiene vi har er mindre større eller lik p rot verdi
 
-            if (compare < 0){
+            if (compare < 0) {  // //hvis verdien somn sammenlinges med p rot node verdi er mindre =(compare value = -1)
                 p = p.venstre; //så settes verdien inn som venstre node
 
-            } else if(compare>0){ //hvis nåværende verdi som sammenlignes med p rot verdien er større
+            } else if (compare > 0) { //hvis nåværende verdi som sammenlignes med p rot verdien er større (compare value = 1)
                 p = p.høyre; //så settes verdien inn som høyre node
-            }
-            else{ //hvis compare verdiene er like for den nåværende verdien vi sammenlinger med og verdien i p noden
+            } else { //hvis compare verdiene er like for den nåværende verdien vi sammenlinger med og verdien i p noden (compare value = 0)
 
                 antallLike_NodeVerdier++; //Det er tillatt med duplikater og det betyr at en verdi kan forekomme flere ganger.
-                                          //vi plusser da for hver node som har lik verdi
+                //vi plusser da for hver node som har lik verdi
+
                 p = p.høyre; //setter den like nodeverdien til høyre for forldrenoden vi er på (P)
             }
         }
-        return antallLike_NodeVerdier; //returnere antall forekomster av verdi i treet.
+        return antallLike_NodeVerdier; //returnere antall like forekomster av verdier i treet.
 
         /*
         // Lag kode for metoden public int antall(T verdi).
@@ -186,21 +186,21 @@ public class EksamenSBinTre<T> {
 
         //(p blir definert som rotnoden q)
 
-        if(p==null){ // hvis p noden er tom
+        if (p == null) { // hvis p noden er tom
 
             throw new NoSuchElementException("Da er hele treet tomt"); //vi har da ikke et tree fordi for oss er:
-                                                                      // P = rotnoden som vil si at treet er tomt
+            // P = rotnoden som vil si at treet er tomt
         }
 
-        while(true){
+        while (true) {
 
-            if(p.venstre != null){ // definerer at hvis venstre noden til foreldrenoden ikke er tom
+            if (p.venstre != null) { // definerer at hvis venstre noden til foreldrenoden ikke er tom
                 p = p.venstre; // så er p venstre noden til foreldre noden
 
-            }else if(p.høyre != null){ // eller hvis høyre noden til foreldrenoden ikke er tom
+            } else if (p.høyre != null) { // eller hvis høyre noden til foreldrenoden ikke er tom
                 p = p.høyre; //så setter vi p høyre noden til foreldre noden
 
-            }else{
+            } else {
                 return p; //eller hvis venstre noden eller høyre noden er null - tom så returneres kun rotnoden tilbake som her er (p)
             }
         }
@@ -213,35 +213,27 @@ public class EksamenSBinTre<T> {
 
     }
 
-    private static <T> Node<T> nestePostorden(Node<T> p) { //Tenker å ta utganspunkt i fremgangsmåten postorden fra kompendie under 5.1.7 om postorden
+    private static <T> Node<T> nestePostorden(Node<T> p) { //Tenker å ta ibruk fremgangsmåten for postorden fra kompendie under 5.1.7 om postorden
 
         /*
-      Kilde: under 5.1.7 h - om Postorden:
-
-    //Hvis p ikke har en forelder, så er p den siste i postorden.
-    //Hvis p er høyre barn til sin forelder f, er forelderen f den neste.
-    //Hvis p er venstre barn til sin forelder f, gjelder:
-    //Hvis p er enebarn (f.høyre er null), er forelderen f den neste.
-    //Hvis p ikke er enebarn (dvs. f.høyre er ikke null),
-    //så er den neste den noden som kommer først i postorden i subtreet med f.høyre som rot.
+    Kilde: under 5.1.7 h - om Postorden: her definerte de fordeldre noden som (f) men jeg valgte å definere den som forelder
          */
-
 
         Node<T> forelder = p.forelder; //definerer at forelder er foreldre noden til p
 
-        if(p.forelder == null){ //hvis p ikke har forelder
+        if (p.forelder == null) { //hvis p ikke har forelder
             p = null; // da har ikke p en neste og vi returnere 0
 
-        }else if(p == forelder.høyre){ //hvis p er høyre barn til sin forelder (q)
+        } else if (p == forelder.høyre) { //hvis p er høyre barn til sin forelder (q)
             p = forelder; // så er forelder (q) den neste
 
-        }else if(forelder.venstre == p){ //else hvis p er det venstre barn til foreldre noden (q)
+        } else if (forelder.venstre == p) { //else hvis p er det venstre barn til foreldre noden (q)
 
-            if(forelder.høyre==null) { // hvis høyre noden til foreldre q er tom så har vi kun en venstre node for p
+            if (forelder.høyre == null) { // og hvis høyre noden til foreldre q er tom så har vi kun en venstre node for p
                 p = forelder; // da er foreldre den neste node for p. Siden høyre noden for q er tom
 
-            }else{ //derimot hvis foreldre noden i tilegg har en høyre node da at forledre høyre ikke er null
-                p = førstePostorden(forelder.høyre); //
+            } else { //derimot hvis foreldre noden i tilegg har en høyre node så det den neste den noden som kommer først i
+                p = førstePostorden(forelder.høyre); //førstenpostoden i subtreet med foreldrens noden sin høyre som rot
             }
         }
         return p;
@@ -250,53 +242,38 @@ public class EksamenSBinTre<T> {
          nestePostorden skal returnere den noden som kommer etter p i postorden
           //throw new UnsupportedOperationException("Ikke kodet ennå!");
          */
-
-
     }
 
-
     public void postorden(Oppgave<? super T> oppgave) {
-
 
 
         throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
 
     public void postordenRecursive(Oppgave<? super T> oppgave) { // Er den offentlige metoden som kaller hjelpemetoden
-        postordenRecursive( rot, oppgave); //sjekker om treet vil være tomt - (vis da rot veriden p er tom)
+        postordenRecursive(rot, oppgave); //sjekker om treet vil være tomt - (vis da rot veriden p er tom)
     }
 
     private void postordenRecursive(Node<T> p, Oppgave<? super T> oppgave) {
+        //For den rekursive metoden skal du lage et rekursivt kall som traverserer treet i postorden rekkefølge.
+
         // Tar ibruk kildekoden i kompendie 5.1.7 a) for å implementere en privat hjelpemetode som utfører rekursjonen
-
-        /*Fra kompendie 5.1.7 a)
-
-          oppgave.utførOppgave(p.verdi);                       // utfører oppgaven
-
-      if (p.venstre != null) preorden(p.venstre,oppgave);  // til venstre barn
-      if (p.høyre != null) preorden(p.høyre,oppgave);      // til høyre barn
-  }
-  */
-    //kaller på metoden postoderdenrecursive i stedet for preorden metoden(5.1.7 a fra kompendie)
-    //postoderdenrecursive blir da koblet til Interfacet oppgave som kaller på den abstracte metoden utføroppgave
+        //kaller på metoden postoderdenrecursive i stedet for preorden metoden(5.1.7 a fra kompendie)
+        //postoderdenrecursive blir da koblet til Interfacet oppgave som kaller på den abstracte metoden - utføroppgave
 
 
-        if (p.venstre != null){
-            postordenRecursive(p.venstre,oppgave);
+        if (p.venstre != null) {
+            postordenRecursive(p.venstre, oppgave);
             //hvis venstre node verdi til (p-rot)/foreldre noden ikke er null, så vil vi i en postorden rekkefølge traverere treet fra venstre barn node
         }
         if (p.høyre != null) {
-            postordenRecursive(p.høyre,oppgave);
+            postordenRecursive(p.høyre, oppgave);
             //hvis høyre node verdi til p-rot ikke er null, så skal vi traversere videre til høyre barn og deretter til forelder noden
         }
-
         oppgave.utførOppgave(p.verdi);//interface oppgave kaller på metoden abstract metoden utføroppgave
 
+        // throw new UnsupportedOperationException("Ikke kodet ennå!");
 
-        /*
-        For den rekursive metoden skal du lage et rekursivt kall som traverserer treet i postorden rekkefølge.
-         // throw new UnsupportedOperationException("Ikke kodet ennå!");
-         */
     }
 
 
