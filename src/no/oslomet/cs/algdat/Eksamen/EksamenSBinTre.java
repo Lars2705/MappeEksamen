@@ -214,11 +214,10 @@ public class EksamenSBinTre<T> {
 
     }
 
-    private static <T> Node<T> nestePostorden(Node<T> p) { //Tenker å ta ibruk fremgangsmåten for postorden fra kompendie under 5.1.7 om postorden
+    private static <T> Node<T> nestePostorden(Node<T> p) {
 
-        /*
-    Kilde: under 5.1.7 h - om Postorden: her definerte de fordeldre noden som (f) men jeg valgte å definere den som forelder
-         */
+        //Tenker å ta ibruk fremgangsmåten for postorden fra kompendie under 5.1.7 om postorden
+        //Kilde: under 5.1.7 h - om Postorden: her definerte de fordeldre noden som (f) men jeg valgte å definere den som forelder
 
         Node<T> forelder = p.forelder; //definerer at forelder er foreldre noden til p
 
@@ -239,11 +238,10 @@ public class EksamenSBinTre<T> {
         }
         return p;
 
-        /*
-         nestePostorden skal returnere den noden som kommer etter p i postorden
 
-          //throw new UnsupportedOperationException("Ikke kodet ennå!");
-         */
+        //nestePostorden skal returnere den noden som kommer etter p i postorden
+        //throw new UnsupportedOperationException("Ikke kodet ennå!");
+
     }
 
     public void postorden(Oppgave<? super T> oppgave) {
@@ -263,6 +261,8 @@ public class EksamenSBinTre<T> {
         Node<T> p = førstePostorden(rot); // Starter med å finne den første noden p i postorden
 
         while (!(p == null)) { // bruker en while løkke for å definere at så lenge rot noden p ikke er tom
+
+            oppgave.utførOppgave(p.verdi); // Interface oppgaven kaller på den abstracte metoden utføroppgave som skal skrive ut verdiene som blir traversert i postorden rekkefølge til skjerm
             p = nestePostorden(p); // så skal nestePostorden returnere den noden som kommer etter p i postorden
 
             //  throw new UnsupportedOperationException("Ikke kodet ennå!");
@@ -298,8 +298,6 @@ public class EksamenSBinTre<T> {
     public ArrayList<T> serialize() {
         throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
-
-
 
 
     static <K> EksamenSBinTre<K> deserialize(ArrayList<K> data, Comparator<? super K> c) {
