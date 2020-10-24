@@ -207,6 +207,7 @@ public class EksamenSBinTre<T> {
 
         /*
             Førstepostorden skal returnere første node post orden med p som rot
+
            //throw new UnsupportedOperationException("Ikke kodet ennå!");
 
          */
@@ -240,6 +241,7 @@ public class EksamenSBinTre<T> {
 
         /*
          nestePostorden skal returnere den noden som kommer etter p i postorden
+
           //throw new UnsupportedOperationException("Ikke kodet ennå!");
          */
     }
@@ -247,15 +249,24 @@ public class EksamenSBinTre<T> {
     public void postorden(Oppgave<? super T> oppgave) {
 
         //Oppgave kan for eksempel være skriv til skjerm, og da vil denne metoden skrive ut treet i post orden.
-  //viktig! ->//Du skal implementere den første funksjonen uten bruk av rekursjon og uten bruk av hjelpevariabler som stack / queue.
+        //viktig! ->//Du skal implementere den første funksjonen uten bruk av rekursjon og uten bruk av hjelpevariabler som stack / queue.
 
-    //tankegang:
-        //1) Du skal bruke funksjonen nestePostorden fra forrige oppgave.
-        // 2) Start med å finne den første noden p i postorden.
-        // 3) Deretter vil (f.eks. i en while-løkke) setningen: p = nestePostorden(p); gi den neste. Osv.
-        // 4) til p blir null
+        //tankegang:
+        // 1) Start med å finne den første noden p i postorden. - rot noden
+        // 2) Deretter vil (f.eks. i en while-løkke) setningen: p = nestePostorden(p); gi den neste. Osv. til p blir null
+        // 3) Du skal bruke funksjonen nestePostorden fra forrige oppgave.
 
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        //Målet med oppgaven er å traversere treet i post orden rekkefølge og skrive ut verdiene til nodene vi traverserer
+        //vi definerer nodene som blir passert som node p og traverser treet og skriver ut verdiene i postorden rekkefølgen helt til den siste noden p vi traverserer har null verdi
+
+
+        Node<T> p = førstePostorden(rot); // Starter med å finne den første noden p i postorden
+
+        while (!(p == null)) { // bruker en while løkke for å definere at så lenge rot noden p ikke er tom
+            p = nestePostorden(p); // så skal nestePostorden returnere den noden som kommer etter p i postorden
+
+            //  throw new UnsupportedOperationException("Ikke kodet ennå!");
+        }
     }
 
     public void postordenRecursive(Oppgave<? super T> oppgave) { // Er den offentlige metoden som kaller hjelpemetoden
@@ -268,7 +279,6 @@ public class EksamenSBinTre<T> {
         // Tar ibruk kildekoden i kompendie 5.1.7 a) for å implementere en privat hjelpemetode som utfører rekursjonen
         //kaller på metoden postoderdenrecursive i stedet for preorden metoden(5.1.7 a fra kompendie)
         //postoderdenrecursive blir da koblet til Interfacet oppgave som kaller på den abstracte metoden - utføroppgave
-
 
         if (p.venstre != null) {
             postordenRecursive(p.venstre, oppgave);
