@@ -111,7 +111,7 @@ public class EksamenSBinTre<T> {
         // p er nå null, dvs. ute av treet, q er den siste vi passerte
 
         p = new Node<>(verdi, null, null, q);                  // oppretter en ny node
-        //referer til at q er forelder i hver node som oprettes
+        //referer til at q er forelder til p
 
         if (q == null) {
             rot = p;                  // p blir rotnode
@@ -246,6 +246,14 @@ public class EksamenSBinTre<T> {
 
     public void postorden(Oppgave<? super T> oppgave) {
 
+        //Oppgave kan for eksempel være skriv til skjerm, og da vil denne metoden skrive ut treet i post orden.
+  //viktig! ->//Du skal implementere den første funksjonen uten bruk av rekursjon og uten bruk av hjelpevariabler som stack / queue.
+
+    //tankegang:
+        //1) Du skal bruke funksjonen nestePostorden fra forrige oppgave.
+        // 2) Start med å finne den første noden p i postorden.
+        // 3) Deretter vil (f.eks. i en while-løkke) setningen: p = nestePostorden(p); gi den neste. Osv.
+        // 4) til p blir null
 
         throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
@@ -280,6 +288,9 @@ public class EksamenSBinTre<T> {
     public ArrayList<T> serialize() {
         throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
+
+
+
 
     static <K> EksamenSBinTre<K> deserialize(ArrayList<K> data, Comparator<? super K> c) {
         throw new UnsupportedOperationException("Ikke kodet ennå!");
