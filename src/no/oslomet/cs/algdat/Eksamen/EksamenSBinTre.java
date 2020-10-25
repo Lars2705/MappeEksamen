@@ -82,9 +82,9 @@ public class EksamenSBinTre<T> {
     }
 
 
-    public boolean leggInn(T verdi) {  //Kildekoden er hentet fra kompendie Programkode 5.2 3 a) og har lagt til forldee referanse
+    public boolean leggInn(T verdi) {  //Programkoden er hentet fra kompendie 5.2 3 a) og har lagt til forldee referanse
 
-        /* - referanse om kildekoden hentet fra programkode 5.2.3 a)
+        /* - referanse om programkoden hentet fra programkode 5.2.3 a)
         brukes to nodereferanser p og q. Referansen p starter i rotnoden.
         Den flyttes så nedover i treet - til venstre når verdi er mindre enn nodeverdien og til høyre ellers.
         Sammenligningene utføres ved hjelp av compare-metoden til komparatoren comp.
@@ -110,7 +110,7 @@ public class EksamenSBinTre<T> {
 
         // p er nå null, dvs. ute av treet, q er den siste vi passerte
 
-        p = new Node<>(verdi, null, null, q);                  // oppretter en ny node
+        p = new Node<>(verdi,  q);  // oppretter en ny node  - tar ibruk konstruktøren private Node(T verdi, Node<T> forelder)
         //referer til at q er forelder til p
 
         if (q == null) {
@@ -121,10 +121,15 @@ public class EksamenSBinTre<T> {
 
         } else {
             q.høyre = p;                        // høyre barn til q
+
         }
 
         antall++;                                // én verdi mer i treet
+        endringer++;
         return true;                             // vellykket innlegging
+
+
+
 
         /*
         // Forelder må få riktig verdi ved hver innlegging, men forelder skal være null i rotnoden.
@@ -138,14 +143,25 @@ public class EksamenSBinTre<T> {
 
 
     public boolean fjern(T verdi) {
+        //Lag metoden public boolean fjern(T verdi).
+        // Der kan du kopiere Programkode 5.2 8 d),
+        // men i tillegg må du gjøre de endringene som trengs for at pekeren forelder får korrekt
+        // verdi i alle noder etter en fjerning
+
         throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
 
     public int fjernAlle(T verdi) {
+        //Lag så metoden public int fjernAlle(T verdi).
+        // Den skal fjerne alle forekomstene av verdi i treet. Husk at duplikater er tillatt.
+        // Dermed kan en og samme verdi ligge flere steder i treet.
+        // Metoden skal returnere antallet som ble fjernet.
+        //Hvis treet er tomt, skal 0 returneres.
+
         throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
 
-    public int antall(T verdi) {  //Har tatt ibruk kildekoden fra kompendie. Innenfor ukeoppgave 9 oppgave 5.2.6 b)
+    public int antall(T verdi) {  //Har tatt ibruk programkoden fra kompendie. Innenfor ukeoppgave 9 oppgave 5.2.6 b)
 
         Node<T> p = rot; //definerer p som rot noden - altså første noden
 
@@ -164,6 +180,8 @@ public class EksamenSBinTre<T> {
                 antallLike_NodeVerdier++; //Det er tillatt med duplikater og det betyr at en verdi kan forekomme flere ganger.
                 //vi plusser da for hver node som har lik verdi
 
+
+
                 p = p.høyre; //setter den like nodeverdien til høyre for forldrenoden vi er på (P)
             }
         }
@@ -179,10 +197,15 @@ public class EksamenSBinTre<T> {
     }
 
     public void nullstill() {
+        //Lag så metoden public void nullstill().
+        // Den skal traversere (rekursivt eller iterativt) treet i en eller annen rekkefølge og sørge for at samtlige
+        //pekere og nodeverdier i treet blir nullet.
+        // Det er med andre ord ikke tilstrekkelig å sette rot til null og antall til 0
+
         throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
 
-    private static <T> Node<T> førstePostorden(Node<T> p) { //tatt ibruk kildekoden 5.1.7 h) fra kompendie
+    private static <T> Node<T> førstePostorden(Node<T> p) { //tatt utganspunkt i programkode 5.1.7 h) fra kompendie
 
         //(p blir definert som rotnoden q)
 
@@ -217,7 +240,7 @@ public class EksamenSBinTre<T> {
     private static <T> Node<T> nestePostorden(Node<T> p) {
 
         //Tenker å ta ibruk fremgangsmåten for postorden fra kompendie under 5.1.7 om postorden
-        //Kilde: under 5.1.7 h - om Postorden: her definerte de fordeldre noden som (f) men jeg valgte å definere den som forelder
+        //Kilde: under 5.1.7 h - om Postorden: I kompendie defineres fordeldre noden som (f), men jeg valgte å definere den som forelder
 
         Node<T> forelder = p.forelder; //definerer at forelder er foreldre noden til p
 
@@ -240,6 +263,7 @@ public class EksamenSBinTre<T> {
 
 
         //nestePostorden skal returnere den noden som kommer etter p i postorden
+
         //throw new UnsupportedOperationException("Ikke kodet ennå!");
 
     }
@@ -260,10 +284,10 @@ public class EksamenSBinTre<T> {
 
         Node<T> p = førstePostorden(rot); // Starter med å finne den første noden p i postorden
 
-        while (!(p == null)) { // bruker en while løkke for å definere at så lenge rot noden p ikke er tom
+        while (!(p == null)) { // bruker en while løkke for å definere at så lenge rot noden p ikke er tom så kjøres:
 
-            oppgave.utførOppgave(p.verdi); // Interface oppgaven kaller på den abstracte metoden utføroppgave som skal skrive ut verdiene som blir traversert i postorden rekkefølge til skjerm
-            p = nestePostorden(p); // så skal nestePostorden returnere den noden som kommer etter p i postorden
+            oppgave.utførOppgave(p.verdi); // Interface oppgaven som kaller på den abstracte metoden utføroppgave som skal skrive ut verdiene som blir traversert i postorden rekkefølge til skjerm
+            p = nestePostorden(p); // nestePostorden som returnere den noden som kommer etter p i postorden
 
             //  throw new UnsupportedOperationException("Ikke kodet ennå!");
         }
@@ -274,21 +298,22 @@ public class EksamenSBinTre<T> {
     }
 
     private void postordenRecursive(Node<T> p, Oppgave<? super T> oppgave) {
+
         //For den rekursive metoden skal du lage et rekursivt kall som traverserer treet i postorden rekkefølge.
 
-        // Tar ibruk kildekoden i kompendie 5.1.7 a) for å implementere en privat hjelpemetode som utfører rekursjonen
-        //kaller på metoden postoderdenrecursive i stedet for preorden metoden(5.1.7 a fra kompendie)
+        // Tar ibruk programkode 5.1.7 a) fra kompendie for å implementere en privat hjelpemetode som utfører rekursjonen
+        //kaller på metoden postoderdenrecursive i stedet for pre orden metoden som blir gjort i (5.1.7 a fra kompendie)
         //postoderdenrecursive blir da koblet til Interfacet oppgave som kaller på den abstracte metoden - utføroppgave
 
-        if (p.venstre != null) {
-            postordenRecursive(p.venstre, oppgave);
-            //hvis venstre node verdi til (p-rot)/foreldre noden ikke er null, så vil vi i en postorden rekkefølge traverere treet fra venstre barn node
+        if (p.venstre != null) {//hvis venstre node verdi til (p-rot), noden ikke er null
+            postordenRecursive(p.venstre, oppgave);  //, så vil vi i en postorden rekkefølge traverere treet fra venstre barn node
+
         }
-        if (p.høyre != null) {
-            postordenRecursive(p.høyre, oppgave);
-            //hvis høyre node verdi til p-rot ikke er null, så skal vi traversere videre til høyre barn og deretter til forelder noden
+        if (p.høyre != null) { //hvis høyre node verdi til p-rot ikke er null, så
+            postordenRecursive(p.høyre, oppgave);  //så skal vi traversere videre til høyre barn
+
         }
-        oppgave.utførOppgave(p.verdi);//interface oppgave kaller på metoden abstract metoden utføroppgave
+        oppgave.utførOppgave(p.verdi);  // Interface oppgaven kaller på den abstracte metoden utføroppgave som skal skrive ut verdiene som blir traversert i postorden rekkefølge til skjerm
 
         // throw new UnsupportedOperationException("Ikke kodet ennå!");
 
