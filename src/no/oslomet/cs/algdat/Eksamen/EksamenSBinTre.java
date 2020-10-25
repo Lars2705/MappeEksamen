@@ -227,8 +227,22 @@ public class EksamenSBinTre<T> {
         // Metoden skal returnere antallet som ble fjernet.
         //Hvis treet er tomt, skal 0 returneres.
 
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        if (tom()) { //Hvis treet er tomt, skal 0 returneres.
+
+            return 0;
+        }
+
+        int AntallSomBleFjernet = 0;
+
+        while (fjern(verdi)) { // Den skal fjerne alle forekomstene av (verdi) i treet.
+
+            AntallSomBleFjernet++;  // Metoden skal returnere antallet som ble fjernet.
+
+        }
+        return AntallSomBleFjernet;
+        //hrow new UnsupportedOperationException("Ikke kodet ennå!");
     }
+
 
     public int antall(T verdi) {  //Har tatt ibruk programkoden fra kompendie. Innenfor ukeoppgave 9 oppgave 5.2.6 b)
 
