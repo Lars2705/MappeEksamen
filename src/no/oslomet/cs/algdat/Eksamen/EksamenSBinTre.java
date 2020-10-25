@@ -110,7 +110,7 @@ public class EksamenSBinTre<T> {
 
         // p er nå null, dvs. ute av treet, q er den siste vi passerte
 
-        p = new Node<>(verdi,  q);  // oppretter en ny node  - tar ibruk konstruktøren private Node(T verdi, Node<T> forelder)
+        p = new Node<>(verdi, q);  // oppretter en ny node  - tar ibruk konstruktøren private Node(T verdi, Node<T> forelder)
         //referer til at q er forelder til p
 
         if (q == null) {
@@ -145,10 +145,79 @@ public class EksamenSBinTre<T> {
     public boolean fjern(T verdi) {
         //Lag metoden public boolean fjern(T verdi).
         // Der kan du kopiere Programkode 5.2 8 d),
-        // men i tillegg må du gjøre de endringene som trengs for at pekeren forelder får korrekt
+        // men i tillegg må du gjøre de endringene som trengs for at pekeren forelder får korrekt,
         // verdi i alle noder etter en fjerning
 
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        //Har implementert programkode 5.2.8 d)
+        if (verdi == null) {
+            return false;  // treet har ingen nullverdier
+        }
+
+        Node<T> p = rot, q = null;   // q skal være forelder til p
+
+        while (p != null)            // leter etter verdi
+        {
+            int compare = comp.compare(verdi, p.verdi);      // sammenligner
+            if (compare < 0) {
+                q = p;
+                p = p.venstre; // går til venstre
+            } else if (compare > 0) {
+                q = p;
+                p = p.høyre; // går til høyre
+            } else break;    // den søkte verdien ligger i p
+        }
+        if (p == null) {
+            return false;   // finner ikke verdi
+        }
+
+        if (p.venstre == null || p.høyre == null)  // Tilfelle 1) og 2)
+        {
+            Node<T> b = p.venstre != null ? p.venstre : p.høyre;  // b for barn
+            if (p == rot) {
+                rot = b;
+
+            } else if (p == q.venstre) {
+                q.venstre = b;
+                if (b != null) { //hvis venstre barne noden verdi ikke er tom etter en fjerning
+                    b.forelder = q; // så vet vi at foreldre noden koblet til venstre barne node heller ikke er tom
+                    //foreldre noden for barne noden b er da q
+                }
+            } else {
+                q.høyre = b;
+                if (b != null) { //hvis høyre barne node verdi ikke er tom etter en fjerning
+                    b.forelder = q; // så vet vi at foreldre noden koblet til høyre barne node heller ikke er tom
+                }                    //foreldre noden for barne noden b er da q
+            }
+        } else { // Tilfelle 3) //hvis p.venstre og p.høyre ikke er null etter fjern
+
+            Node<T> s = p, r = p.høyre;   // finner neste i inorden
+            while (r.venstre != null) {
+                s = r;    // s er forelder til r
+                r = r.venstre;
+            }
+
+            p.verdi = r.verdi;   // kopierer verdien i r til p
+
+            if (s != p) { //hvis noden p ikke er lik foreldre noden s
+                s.venstre = r.høyre; //så setter vi r høyre node lik s foreldre noden sin venstre node
+
+                if (r.høyre != null) { //hvis r høyre node verdi ikke er null
+                    r.høyre.forelder = s; // så må foreldre noden til r høyre node være s
+                }
+            } else { //hvis foreldre noden S sin node verdi er lik p.høyre sin node verdi
+                s.høyre = r.høyre; // så setter vi foreldre noden sin høyre node verdi lik node r.høyre sin verdi
+
+                if (r.høyre != null) { //hvis r høyre node verdi ikke er null
+                    r.høyre.forelder = s; // så må foreldre noden til r høyre node være s
+                }
+
+            }
+        }
+
+        antall--;   // det er nå én node mindre i treet
+        return true;
+
+        //throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
 
     public int fjernAlle(T verdi) {
@@ -179,7 +248,6 @@ public class EksamenSBinTre<T> {
 
                 antallLike_NodeVerdier++; //Det er tillatt med duplikater og det betyr at en verdi kan forekomme flere ganger.
                 //vi plusser da for hver node som har lik verdi
-
 
 
                 p = p.høyre; //setter den like nodeverdien til høyre for forldrenoden vi er på (P)
