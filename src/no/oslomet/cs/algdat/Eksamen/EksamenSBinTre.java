@@ -173,6 +173,7 @@ public class EksamenSBinTre<T> {
             } else {
                 q.høyre = b;
             }
+
         } else { // Tilfelle 3) //hvis p.venstre og p.høyre ikke er null etter fjern
 
             Node<T> s = p, r = p.høyre;   // finner neste i inorden
@@ -183,16 +184,16 @@ public class EksamenSBinTre<T> {
 
             p.verdi = r.verdi;   // kopierer verdien i r til p
 
-            if (r.høyre != null) { //hvis r høyre node verdi ikke er null
+            if (r.høyre != null) { //hvis r høyre-node verdi ikke er null og inneholder en verdi
                 r.høyre.forelder = s; // så må foreldre noden til r høyre node være s
             }
 
             if (s != p) { //hvis noden p ikke er lik foreldre noden s
-                s.venstre = null; //så setter vi r høyre node lik s foreldre noden sin venstre node
+                s.venstre = null; //så setter vi at venstre peker noden til s må være null
 
 
-            } else { //hvis foreldre noden S sin node verdi er lik p.høyre sin node verdi
-                s.høyre = r.høyre; // så setter vi foreldre noden sin høyre node verdi lik node r.høyre sin verdi
+            } else { //hvis foreldre noden S er lik p
+                s.høyre = r.høyre; // så setter vi foreldre noden s.høyre node verdi lik node r.høyre sin verdi
 
 
             }
@@ -231,8 +232,9 @@ public class EksamenSBinTre<T> {
 
     }
 
+    //Har tatt ibruk programkoden fra kompendie. Innenfor ukeoppgave 9 oppgave 5.2.6 b)
 
-    public int antall(T verdi) {  //Har tatt ibruk programkoden fra kompendie. Innenfor ukeoppgave 9 oppgave 5.2.6 b)
+    public int antall(T verdi) {
 
         Node<T> p = rot; //definerer p som rot noden - altså første noden
 
@@ -267,19 +269,18 @@ public class EksamenSBinTre<T> {
     }
 
     public void nullstill() {
+
         //Lag så metoden public void nullstill().
         // Den skal traversere (rekursivt eller iterativt) treet i en eller annen rekkefølge og sørge for at samtlige
         //pekere og nodeverdier i treet blir nullet.
         // Det er med andre ord ikke tilstrekkelig å sette rot til null og antall til 0
 
 
-        // slettTree(rot);
-
-
-        Node<T> p = rot; //definerer node p lik rot noden
+        Node<T> p = rot; //definerer rot noden lik node p
 
         if (!tom()) { //hvis noden ikke er tom
             slett(p); //så sender vi rot noden p igjennom hjelpetoden for å slette verdiene i treet, og kaller på metoden slett rekursivt
+                      //Viktig å huske at jeg traverserr treet i det requsive kallet i postoden rekkefølge som betyr at rotnoden er den siste verdien som blir nullstilt
 
             rot = null; //setter rot noden sin verdi lik 0
             antall = 0;
@@ -304,22 +305,6 @@ public class EksamenSBinTre<T> {
         Node_p.verdi = null; //setter verdien i selve p noden lik null
     }
 
-
-    /*
-    private static <T> void slettTree(Node<T> p) {
-        if (p == null) return;
-
-        slettTree(p.venstre);
-        slettTree(p.høyre);
-
-        // nullstill
-        p.verdi = null;
-        p.venstre = null;
-        p.høyre = null;
-        p.forelder = null;
-    }
-
-     */
 
 
     private static <T> Node<T> førstePostorden(Node<T> p) { //tatt utganspunkt i programkode 5.1.7 h) fra kompendie
@@ -438,11 +423,14 @@ public class EksamenSBinTre<T> {
 
 
     public ArrayList<T> serialize() {
+
         throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
 
 
     static <K> EksamenSBinTre<K> deserialize(ArrayList<K> data, Comparator<? super K> c) {
+
+
         throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
 
