@@ -136,7 +136,7 @@ public class EksamenSBinTre<T> {
         // verdi i alle noder etter en fjerning
 
 
-        //Har implementert programkode 5.2.8 d)
+        //Har implementert programkode 5.2.8 d) fra kompendie
         if (verdi == null) {
             return false;  // treet har ingen nullverdier
         }
@@ -190,7 +190,8 @@ public class EksamenSBinTre<T> {
             }
 
             if (s != p) { //hvis noden p ikke er lik foreldre noden s
-                s.venstre = null; //så setter vi at venstre peker noden til s må være null
+                s.venstre = r.høyre;
+              //  s.venstre = null; //så setter vi at venstre peker noden til s må være null
 
 
             } else { //hvis foreldre noden S er lik p
@@ -362,6 +363,8 @@ public class EksamenSBinTre<T> {
         }
         return p;
 
+        //finner den neste noden i postorden
+
         //throw new UnsupportedOperationException("Ikke kodet ennå!");
 
     }
@@ -427,11 +430,19 @@ public class EksamenSBinTre<T> {
 
     static <K> EksamenSBinTre<K> deserialize(ArrayList<K> data, Comparator<? super K> c) {
 
+        //har tatt ibruk programkode 5.2.3 c fra kompendie
+
         // 1) Deserialize skal da ta dette arrayet,
         // 2)legge inn alle verdiene (igjen i nivå orden),
         // 3) Å dermed gjenskape treet.
 
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        {
+            EksamenSBinTre<K> tre = new EksamenSBinTre<>(c); // Tar ibruk EksamenSBinTre som Constructior som tar inn komparatoren c for typen T.
+           // liste.forEach(tre::leggInn);  // bygger opp et tre ved å hente én og én verdi fra arraylisten og bygger opp treet i nivåorden
+            return tre;                // returnere tree
+        }
+
+        //throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
 
 
