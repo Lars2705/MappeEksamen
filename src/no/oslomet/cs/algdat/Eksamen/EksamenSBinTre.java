@@ -82,7 +82,9 @@ public class EksamenSBinTre<T> {
     }
 
 
-    public boolean leggInn(T verdi) {  //Programkoden er hentet fra kompendie 5.2 3 a) og har lagt til forldee referanse
+    //Programkoden er hentet fra kompendie 5.2 3 a) og har lagt til forldee referanse
+
+    public boolean leggInn(T verdi) {
 
         Objects.requireNonNull(verdi, "Ulovlig med nullverdier!");
 
@@ -117,18 +119,17 @@ public class EksamenSBinTre<T> {
         endringer++;
         return true;                             // vellykket innlegging
 
-        /*
+
         // Forelder må få riktig verdi ved hver innlegging, men forelder skal være null i rotnoden.
         // Lag metoden public boolean leggInn(T verdi). Der kan du kopiere Programkode 5.2 3 a),
         // men i tillegg må du gjøre de endringene som trengs for at referansen forelder får korrekt verdi i hver node.
         // Teknikken med en forelder-referanse brukes f.eks. i klassen TreeSet i java.util.
         // Sjekk at følgende kode er feilfri (ikke kaster noen unntak):
-         */
-
     }
 
 
     public boolean fjern(T verdi) {
+
         //Lag metoden public boolean fjern(T verdi).
         // Der kan du kopiere Programkode 5.2 8 d),
         // men i tillegg må du gjøre de endringene som trengs for at pekeren forelder får korrekt,
@@ -160,9 +161,9 @@ public class EksamenSBinTre<T> {
         if (p.venstre == null || p.høyre == null)  // Tilfelle 1) og 2)
         {
             Node<T> b = p.venstre != null ? p.venstre : p.høyre;  // b for barn
-            if (b != null) { //hvis venstre barne noden verdi ikke er tom etter en fjerning
-                b.forelder = q; // så vet vi at foreldre noden koblet til venstre barne node heller ikke er tom
-            }                   //foreldre noden for barne noden b er da q
+            if (b != null) { //hvis venstre barne node verdi ikke er tom etter en fjerning
+                b.forelder = q; // så setter setter vi pekeren fra barne noden b til foreldre noden q
+            }                   //foreldre noden q for lik verdi som barne noden b
 
             if (p == rot) {
                 rot = b;
@@ -185,7 +186,7 @@ public class EksamenSBinTre<T> {
             p.verdi = r.verdi;   // kopierer verdien i r til p
 
             if (r.høyre != null) { //hvis r høyre-node verdi ikke er null og inneholder en verdi
-                r.høyre.forelder = s; // så må foreldre noden til r høyre node være s
+                r.høyre.forelder = s; // så må foreldre noden til r.høyre node være s
             }
 
             if (s != p) { //hvis noden p ikke er lik foreldre noden s
@@ -204,10 +205,11 @@ public class EksamenSBinTre<T> {
 
         //throw new UnsupportedOperationException("Ikke kodet ennå!");
 
-
     }
 
     public int fjernAlle(T verdi) {
+        //Tar ibruk programkode - 5.2.8 oppgave 5 fra kompendie for fjernalle metoden
+
         //Lag så metoden public int fjernAlle(T verdi).
         // Den skal fjerne alle forekomstene av verdi i treet. Husk at duplikater er tillatt.
         // Dermed kan en og samme verdi ligge flere steder i treet.
@@ -229,12 +231,11 @@ public class EksamenSBinTre<T> {
         return AntallSomBleFjernet;
         //hrow new UnsupportedOperationException("Ikke kodet ennå!");
 
-
     }
 
-    //Har tatt ibruk programkoden fra kompendie. Innenfor ukeoppgave 9 oppgave 5.2.6 b)
-
     public int antall(T verdi) {
+
+        //Har tatt ibruk programkode - oppgave 5.2.6 oppgave 2 fra kompendie. Fant denne fra ukeoppgave 9
 
         Node<T> p = rot; //definerer p som rot noden - altså første noden
 
@@ -259,16 +260,17 @@ public class EksamenSBinTre<T> {
         }
         return antallLike_NodeVerdier; //returnere antall like forekomster av verdier i treet.
 
-        /*
         // Lag kode for metoden public int antall(T verdi).
         // Den skal returnere antall forekomster av verdi i treet.
         // Det er tillatt med duplikater og det betyr at en verdi kan forekomme flere ganger.
         //Hvis verdi ikke er i treet (null er ikke i treet), skal metoden returnere 0.
         // Test koden din ved å lage trær der du legger inn flere like verdier.
-         */
+
     }
 
     public void nullstill() {
+
+        //Har tatt utgangspunkt i programkode - oppgave 5 fra 5.2.8 fra kompendie for nulstill metoden
 
         //Lag så metoden public void nullstill().
         // Den skal traversere (rekursivt eller iterativt) treet i en eller annen rekkefølge og sørge for at samtlige
@@ -280,7 +282,7 @@ public class EksamenSBinTre<T> {
 
         if (!tom()) { //hvis noden ikke er tom
             slett(p); //så sender vi rot noden p igjennom hjelpetoden for å slette verdiene i treet, og kaller på metoden slett rekursivt
-                      //Viktig å huske at jeg traverserr treet i det requsive kallet i postoden rekkefølge som betyr at rotnoden er den siste verdien som blir nullstilt
+            //Viktig å huske at jeg traverserr treet i det requsive kallet i postoden rekkefølge som betyr at rotnoden er den siste verdien som blir nullstilt
 
             rot = null; //setter rot noden sin verdi lik 0
             antall = 0;
@@ -305,16 +307,17 @@ public class EksamenSBinTre<T> {
         Node_p.verdi = null; //setter verdien i selve p noden lik null
     }
 
+    private static <T> Node<T> førstePostorden(Node<T> p) {
 
+        // Førstepostorden skal returnere første node post orden med p som rot
 
-    private static <T> Node<T> førstePostorden(Node<T> p) { //tatt utganspunkt i programkode 5.1.7 h) fra kompendie
-
+        //tatt utganspunkt i programkode 5.1.7 h) fra kompendie
         //(p blir definert som rotnoden q)
 
         if (p == null) { // hvis p noden er tom
+            //vis rotnoden er tom så har (ikke) venstre eller høyre peker en foreldre node, noe som betur at treet ikke eksisterer
 
-            throw new NoSuchElementException("Da er hele treet tomt"); //vi har da ikke et tree fordi for oss er:
-            // P = rotnoden som vil si at treet er tomt
+            throw new NoSuchElementException("Da er hele treet tomt");  //kaster da en exception og sier at hele treet er tomt
         }
 
         while (true) {
@@ -330,14 +333,10 @@ public class EksamenSBinTre<T> {
             }
         }
 
-        /*
-            Førstepostorden skal returnere første node post orden med p som rot
-
-           //throw new UnsupportedOperationException("Ikke kodet ennå!");
-
-         */
-
+        //throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
+
+    //nestePostorden skal returnere den noden som kommer etter p i postorden
 
     private static <T> Node<T> nestePostorden(Node<T> p) {
 
@@ -363,17 +362,11 @@ public class EksamenSBinTre<T> {
         }
         return p;
 
-
-        //nestePostorden skal returnere den noden som kommer etter p i postorden
-
         //throw new UnsupportedOperationException("Ikke kodet ennå!");
 
     }
 
     public void postorden(Oppgave<? super T> oppgave) {
-
-        //Oppgave kan for eksempel være skriv til skjerm, og da vil denne metoden skrive ut treet i post orden.
-        //viktig! ->//Du skal implementere den første funksjonen uten bruk av rekursjon og uten bruk av hjelpevariabler som stack / queue.
 
         //tankegang:
         // 1) Start med å finne den første noden p i postorden. - rot noden
@@ -382,7 +375,6 @@ public class EksamenSBinTre<T> {
 
         //Målet med oppgaven er å traversere treet i post orden rekkefølge og skrive ut verdiene til nodene vi traverserer
         //vi definerer nodene som blir passert som node p og traverser treet og skriver ut verdiene i postorden rekkefølgen helt til den siste noden p vi traverserer har null verdi
-
 
         Node<T> p = førstePostorden(rot); // Starter med å finne den første noden p i postorden
 
@@ -401,16 +393,16 @@ public class EksamenSBinTre<T> {
 
     private void postordenRecursive(Node<T> p, Oppgave<? super T> oppgave) {
 
-        //For den rekursive metoden skal du lage et rekursivt kall som traverserer treet i postorden rekkefølge.
 
         // Tar ibruk programkode 5.1.7 a) fra kompendie for å implementere en privat hjelpemetode som utfører rekursjonen
-        //kaller på metoden postoderdenrecursive i stedet for pre orden metoden som blir gjort i (5.1.7 a fra kompendie)
+
+        //kaller på metoden postoderdenrecursive i stedet for pre-orden metoden som blir gjort i (5.1.7 a fra kompendie)
         //postoderdenrecursive blir da koblet til Interfacet oppgave som kaller på den abstracte metoden - utføroppgave
 
         if (p.venstre != null) {//hvis venstre node verdi til (p-rot), noden ikke er null
             postordenRecursive(p.venstre, oppgave);  //, så vil vi i en postorden rekkefølge traverere treet fra venstre barn node
-
         }
+
         if (p.høyre != null) { //hvis høyre node verdi til p-rot ikke er null, så
             postordenRecursive(p.høyre, oppgave);  //så skal vi traversere videre til høyre barn
 
@@ -424,12 +416,20 @@ public class EksamenSBinTre<T> {
 
     public ArrayList<T> serialize() {
 
+        //Metodene skal henholdsvis serialisere (lage et kompakt format egnet for lagring til f.eks. fil - array)
+        // 1) Selve metoden serialize skal være iterativ
+        // 2) må bruke en kø til å traversere treet i nivå orden.
+        // 3) Arrayet som returneres av serialize skal inneholde verdiene i alle nodene i nivå orden.
+
         throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
 
 
     static <K> EksamenSBinTre<K> deserialize(ArrayList<K> data, Comparator<? super K> c) {
 
+        // 1) Deserialize skal da ta dette arrayet,
+        // 2)legge inn alle verdiene (igjen i nivå orden),
+        // 3) Å dermed gjenskape treet.
 
         throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
