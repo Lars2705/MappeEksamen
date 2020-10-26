@@ -115,7 +115,7 @@ public class EksamenSBinTre<T> {
 
         }
 
-        antall++;                                // én verdi mer i treet
+        antall++;                                // én verdi mer i treet - antall dubplikater av samme verdi i treet
         endringer++;
         return true;                             // vellykket innlegging
 
@@ -191,7 +191,7 @@ public class EksamenSBinTre<T> {
 
             if (s != p) { //hvis noden p ikke er lik foreldre noden s
                 s.venstre = r.høyre;
-              //  s.venstre = null; //så setter vi at venstre peker noden til s må være null
+                //  s.venstre = null; //så setter vi at venstre peker noden til s må være null
 
 
             } else { //hvis foreldre noden S er lik p
@@ -274,7 +274,7 @@ public class EksamenSBinTre<T> {
         //Har tatt utgangspunkt i programkode - oppgave 5 fra 5.2.8 fra kompendie for nulstill metoden
 
         //Lag så metoden public void nullstill().
-        // Den skal traversere (rekursivt eller iterativt) treet i en eller annen rekkefølge og sørge for at samtlige
+        // Den skal traversere rekursivt treet i en eller annen rekkefølge og sørge for at samtlige
         //pekere og nodeverdier i treet blir nullet.
         // Det er med andre ord ikke tilstrekkelig å sette rot til null og antall til 0
 
@@ -286,7 +286,7 @@ public class EksamenSBinTre<T> {
             //Viktig å huske at jeg traverserr treet i det requsive kallet i postoden rekkefølge som betyr at rotnoden er den siste verdien som blir nullstilt
 
             rot = null; //setter rot noden sin verdi lik 0
-            antall = 0;
+            antall = 0; //setter antall noder lik 0
         }
 
     }
@@ -310,7 +310,7 @@ public class EksamenSBinTre<T> {
 
     private static <T> Node<T> førstePostorden(Node<T> p) {
 
-        // Førstepostorden skal returnere første node post orden med p som rot
+        // Førstepostorden skal returnere første node i postorden rekkefølge med p som rot
 
         //tatt utganspunkt i programkode 5.1.7 h) fra kompendie
         //(p blir definert som rotnoden q)
@@ -371,6 +371,8 @@ public class EksamenSBinTre<T> {
 
     public void postorden(Oppgave<? super T> oppgave) {
 
+        //tatt ibruk progrmakode 5.1.7 - oppgave 7 fra ukesoppgaver
+
         //tankegang:
         // 1) Start med å finne den første noden p i postorden. - rot noden
         // 2) Deretter vil (f.eks. i en while-løkke) setningen: p = nestePostorden(p); gi den neste. Osv. til p blir null
@@ -424,7 +426,38 @@ public class EksamenSBinTre<T> {
         // 2) må bruke en kø til å traversere treet i nivå orden.
         // 3) Arrayet som returneres av serialize skal inneholde verdiene i alle nodene i nivå orden.
 
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+        ArrayList<T> verdier = new ArrayList<>(); //laget en arraylist
+        LevelOrder(verdier);
+        return verdier; //returner listen tilbake
+
+        //Metoden LevelOrder(), benytter en kø laget i form av LinkedList(Delkapittel 4.2).
+        // Den skriver ut verdiene i nivåorden og med én verdi for hver iterasjon.
+
+
+
+        //throw new UnsupportedOperationException("Ikke kodet ennå!");
+    }
+
+    public void LevelOrder(ArrayList<T> liste)                // skal ligge i class BinTre
+    {
+        if (tom()) return;                   // tomt tre
+
+        Queue<Node<T>> queue = new LinkedList<>();   // laget en kø i linkedList form
+        queue.add(rot);                     // legger inn roten inn i køen til linkedList
+
+        while (!queue.isEmpty())                    // så lenge køen ikke er tom så så kan vi ta verdiene ut fra køen og legge inn i arraylisten
+        {
+            Node<T> p = queue.remove();             // tar ut fra køen
+            liste.add(p.verdi);
+
+            if (p.venstre != null) {//hvis p.venstre node ikke er lik null sp legger vi de verdiene fra subtreet inn i køen linkedlist
+                queue.add(p.venstre);
+            }
+
+            if (p.høyre != null) { //hvis p.høyre node ikke er lik null sp legger vi de verdiene fra subtreet inn i køen linkedlist
+                queue.add(p.høyre);
+            }
+        }
     }
 
 
@@ -437,9 +470,9 @@ public class EksamenSBinTre<T> {
         // 3) Å dermed gjenskape treet.
 
         {
-            EksamenSBinTre<K> tre = new EksamenSBinTre<>(c); // Tar ibruk EksamenSBinTre som Constructior som tar inn komparatoren c for typen T.
-           // liste.forEach(tre::leggInn);  // bygger opp et tre ved å hente én og én verdi fra arraylisten og bygger opp treet i nivåorden
-            return tre;                // returnere tree
+            EksamenSBinTre<K> tre = new EksamenSBinTre<>(c); //Tar ibruk EksamenSBinTre som Constructior som tar inn komparatoren c for typen T.
+            data.forEach(tre::leggInn);   //bygger opp et tre ved å hente én og én verdi fra arraylisten og bygger opp treet i nivåorden
+            return tre;                   //returnere tree
         }
 
         //throw new UnsupportedOperationException("Ikke kodet ennå!");
