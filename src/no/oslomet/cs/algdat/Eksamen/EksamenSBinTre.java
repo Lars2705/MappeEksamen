@@ -84,17 +84,6 @@ public class EksamenSBinTre<T> {
 
     public boolean leggInn(T verdi) {  //Programkoden er hentet fra kompendie 5.2 3 a) og har lagt til forldee referanse
 
-        /* - referanse om programkoden hentet fra programkode 5.2.3 a)
-        brukes to nodereferanser p og q. Referansen p starter i rotnoden.
-        Den flyttes så nedover i treet - til venstre når verdi er mindre enn nodeverdien og til høyre ellers.
-        Sammenligningene utføres ved hjelp av compare-metoden til komparatoren comp.
-         Referansen q skal ligge et nivå over p, dvs. være forelder til p.
-          Når p blir null, vil q være den siste noden som ble passert.
-           Dermed skal verdi legges inn som et barn til q.
-           Den siste verdien som compare-metoden returnerte, forteller om det skal være venstre eller høyre barn.
-            Hvis treet i utgangspunktet var tomt, lages en rotnode.
-         */
-
         Objects.requireNonNull(verdi, "Ulovlig med nullverdier!");
 
         Node<T> p = rot;
@@ -128,9 +117,6 @@ public class EksamenSBinTre<T> {
         endringer++;
         return true;                             // vellykket innlegging
 
-
-
-
         /*
         // Forelder må få riktig verdi ved hver innlegging, men forelder skal være null i rotnoden.
         // Lag metoden public boolean leggInn(T verdi). Der kan du kopiere Programkode 5.2 3 a),
@@ -147,6 +133,7 @@ public class EksamenSBinTre<T> {
         // Der kan du kopiere Programkode 5.2 8 d),
         // men i tillegg må du gjøre de endringene som trengs for at pekeren forelder får korrekt,
         // verdi i alle noder etter en fjerning
+
 
         //Har implementert programkode 5.2.8 d)
         if (verdi == null) {
@@ -173,20 +160,18 @@ public class EksamenSBinTre<T> {
         if (p.venstre == null || p.høyre == null)  // Tilfelle 1) og 2)
         {
             Node<T> b = p.venstre != null ? p.venstre : p.høyre;  // b for barn
+            if (b != null) { //hvis venstre barne noden verdi ikke er tom etter en fjerning
+                b.forelder = q; // så vet vi at foreldre noden koblet til venstre barne node heller ikke er tom
+            }                   //foreldre noden for barne noden b er da q
+
             if (p == rot) {
                 rot = b;
 
             } else if (p == q.venstre) {
                 q.venstre = b;
-                if (b != null) { //hvis venstre barne noden verdi ikke er tom etter en fjerning
-                    b.forelder = q; // så vet vi at foreldre noden koblet til venstre barne node heller ikke er tom
-                    //foreldre noden for barne noden b er da q
-                }
+
             } else {
                 q.høyre = b;
-                if (b != null) { //hvis høyre barne node verdi ikke er tom etter en fjerning
-                    b.forelder = q; // så vet vi at foreldre noden koblet til høyre barne node heller ikke er tom
-                }                    //foreldre noden for barne noden b er da q
             }
         } else { // Tilfelle 3) //hvis p.venstre og p.høyre ikke er null etter fjern
 
@@ -198,18 +183,17 @@ public class EksamenSBinTre<T> {
 
             p.verdi = r.verdi;   // kopierer verdien i r til p
 
-            if (s != p) { //hvis noden p ikke er lik foreldre noden s
-                s.venstre = r.høyre; //så setter vi r høyre node lik s foreldre noden sin venstre node
+            if (r.høyre != null) { //hvis r høyre node verdi ikke er null
+                r.høyre.forelder = s; // så må foreldre noden til r høyre node være s
+            }
 
-                if (r.høyre != null) { //hvis r høyre node verdi ikke er null
-                    r.høyre.forelder = s; // så må foreldre noden til r høyre node være s
-                }
+            if (s != p) { //hvis noden p ikke er lik foreldre noden s
+                s.venstre = null; //så setter vi r høyre node lik s foreldre noden sin venstre node
+
+
             } else { //hvis foreldre noden S sin node verdi er lik p.høyre sin node verdi
                 s.høyre = r.høyre; // så setter vi foreldre noden sin høyre node verdi lik node r.høyre sin verdi
 
-                if (r.høyre != null) { //hvis r høyre node verdi ikke er null
-                    r.høyre.forelder = s; // så må foreldre noden til r høyre node være s
-                }
 
             }
         }
@@ -218,6 +202,8 @@ public class EksamenSBinTre<T> {
         return true;
 
         //throw new UnsupportedOperationException("Ikke kodet ennå!");
+
+
     }
 
     public int fjernAlle(T verdi) {
@@ -227,8 +213,8 @@ public class EksamenSBinTre<T> {
         // Metoden skal returnere antallet som ble fjernet.
         //Hvis treet er tomt, skal 0 returneres.
 
-        if (tom()) { //Hvis treet er tomt, skal 0 returneres.
 
+        if (tom()) { //Hvis treet er tomt, skal 0 returneres.
             return 0;
         }
 
@@ -241,6 +227,8 @@ public class EksamenSBinTre<T> {
         }
         return AntallSomBleFjernet;
         //hrow new UnsupportedOperationException("Ikke kodet ennå!");
+
+
     }
 
 
@@ -284,8 +272,55 @@ public class EksamenSBinTre<T> {
         //pekere og nodeverdier i treet blir nullet.
         // Det er med andre ord ikke tilstrekkelig å sette rot til null og antall til 0
 
-        throw new UnsupportedOperationException("Ikke kodet ennå!");
+
+        // slettTree(rot);
+
+
+        Node<T> p = rot; //definerer node p lik rot noden
+
+        if (!tom()) { //hvis noden ikke er tom
+            slett(p); //så sender vi rot noden p igjennom hjelpetoden for å slette verdiene i treet, og kaller på metoden slett rekursivt
+
+            rot = null; //setter rot noden sin verdi lik 0
+            antall = 0;
+        }
+
     }
+
+    private static <T> void slett(Node<T> Node_p) {
+
+        //Høyre subtree blir fjernet fra rotnoden
+        if (Node_p.høyre != null) { //hvis høyre peker node fra rot noden ikke er null
+            slett(Node_p.høyre); //setter høyre node barn til rotnoden inn i slett metoden slik at den nå er lik Node_p slik at vi kan slette subtreet på høyre side av rotnoden
+            Node_p.høyre = null; //setter venstre node verdi her lik 0
+        }
+
+        //venster subtree blir fjernet fra rotnoden
+        if (Node_p.venstre != null) { //hvis venstre peker node fra rot noden ikke er null
+            slett(Node_p.venstre); //setter venstre node barn til rotnoden inn i slett metoden slik at den nå er lik Node_p slik at vi kan slette subtreet på venstre side av rotnoden
+            Node_p.venstre = null; //setter høyre node verdi her lik null
+        }
+
+        Node_p.verdi = null; //setter verdien i selve p noden lik null
+    }
+
+
+    /*
+    private static <T> void slettTree(Node<T> p) {
+        if (p == null) return;
+
+        slettTree(p.venstre);
+        slettTree(p.høyre);
+
+        // nullstill
+        p.verdi = null;
+        p.venstre = null;
+        p.høyre = null;
+        p.forelder = null;
+    }
+
+     */
+
 
     private static <T> Node<T> førstePostorden(Node<T> p) { //tatt utganspunkt i programkode 5.1.7 h) fra kompendie
 
@@ -322,23 +357,23 @@ public class EksamenSBinTre<T> {
     private static <T> Node<T> nestePostorden(Node<T> p) {
 
         //Tenker å ta ibruk fremgangsmåten for postorden fra kompendie under 5.1.7 om postorden
-        //Kilde: under 5.1.7 h - om Postorden: I kompendie defineres fordeldre noden som (f), men jeg valgte å definere den som forelder
+        //Kilde: under 5.1.7 h - om Postorden: I kompendie defineres fordeldre noden som (f), men jeg valgte å definere den som parent
 
-        Node<T> forelder = p.forelder; //definerer at forelder er foreldre noden til p
+        Node<T> parent = p.forelder; //definerer at forelder er foreldre noden til p
 
         if (p.forelder == null) { //hvis p ikke har forelder
-            p = null; // da har ikke p en neste og vi returnere 0
+            p = null; // da har ikke p en neste og vi returner null
 
-        } else if (p == forelder.høyre) { //hvis p er høyre barn til sin forelder (q)
-            p = forelder; // så er forelder (q) den neste
+        } else if (p == parent.høyre) { //hvis p er høyre barn til sin forelder (q)
+            p = parent; // så er forelder (q) den neste
 
-        } else if (forelder.venstre == p) { //else hvis p er det venstre barn til foreldre noden (q)
+        } else if (parent.venstre == p) { //else hvis p er det venstre barn til foreldre noden (q)
 
-            if (forelder.høyre == null) { // og hvis høyre noden til foreldre q er tom så har vi kun en venstre node for p
-                p = forelder; // da er foreldre den neste node for p. Siden høyre noden for q er tom
+            if (parent.høyre == null) { // og hvis høyre noden til foreldre q er tom så har vi kun en venstre node for p
+                p = parent; // da er foreldre den neste node for p. Siden høyre noden for q er tom
 
             } else { //derimot hvis foreldre noden i tilegg har en høyre node så det den neste den noden som kommer først i
-                p = førstePostorden(forelder.høyre); //førstenpostoden i subtreet med foreldrens noden sin høyre som rot
+                p = førstePostorden(parent.høyre); //førstenpostoden i subtreet med foreldrens noden sin høyre som rot
             }
         }
         return p;
