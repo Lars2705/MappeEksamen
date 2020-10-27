@@ -64,7 +64,7 @@ public class Test_klasseForMainMetoder {
         System.out.println(tre.fjernAlle(4)); // 3
         tre.fjernAlle(7); tre.fjern(8);
         System.out.println(tre.antall()); // 5
-       // System.out.println(tre + " " + tre.toString());
+      //  System.out.println(tre + " " + tre.toString());
 
         // [1, 2, 6, 9, 10] [10, 9, 6, 2, 1]
         // OBS: Hvis du ikke har gjort oppgave 4 kan du her bruke toString()

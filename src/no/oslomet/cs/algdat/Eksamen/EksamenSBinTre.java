@@ -82,9 +82,9 @@ public class EksamenSBinTre<T> {
     }
 
 
-    //Programkoden er hentet fra kompendie 5.2 3 a) og har lagt til forldee referanse
-
     public boolean leggInn(T verdi) {
+
+        //Programkoden er hentet fra kompendie 5.2 3 a) og har lagt til forldee referanse
 
         Objects.requireNonNull(verdi, "Ulovlig med nullverdier!");
 
@@ -202,6 +202,7 @@ public class EksamenSBinTre<T> {
         }
 
         antall--;   // det er nå én node mindre i treet
+        endringer++;
         return true;
 
         //throw new UnsupportedOperationException("Ikke kodet ennå!");
@@ -236,7 +237,7 @@ public class EksamenSBinTre<T> {
 
     public int antall(T verdi) {
 
-        //Har tatt ibruk programkode - oppgave 5.2.6 oppgave 2 fra kompendie. Fant denne fra ukeoppgave 9
+        //Har tatt ibruk programkode - oppgave 5.2.6 oppgave 2 fra kompendie.
 
         Node<T> p = rot; //definerer p som rot noden - altså første noden
 
@@ -337,9 +338,10 @@ public class EksamenSBinTre<T> {
         //throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
 
-    //nestePostorden skal returnere den noden som kommer etter p i postorden
 
     private static <T> Node<T> nestePostorden(Node<T> p) {
+
+        //nestePostorden skal returnere den noden som kommer etter p i postorden
 
         //Tenker å ta ibruk fremgangsmåten for postorden fra kompendie under 5.1.7 om postorden
         //Kilde: under 5.1.7 h - om Postorden: I kompendie defineres fordeldre noden som (f), men jeg valgte å definere den som parent
@@ -418,46 +420,40 @@ public class EksamenSBinTre<T> {
 
     }
 
-
     public ArrayList<T> serialize() {
+
+        //tar ibruk programkode 5.1.6 a) fra kompendie for å lagre fra arraylist til fil verdi  - NivOrden
 
         //Metodene skal henholdsvis serialisere (lage et kompakt format egnet for lagring til f.eks. fil - array)
         // 1) Selve metoden serialize skal være iterativ
         // 2) må bruke en kø til å traversere treet i nivå orden.
         // 3) Arrayet som returneres av serialize skal inneholde verdiene i alle nodene i nivå orden.
 
-        ArrayList<T> verdier = new ArrayList<>(); //laget en arraylist
-        LevelOrder(verdier);
-        return verdier; //returner listen tilbake
+        ArrayList<T> verdier_til_Liste = new ArrayList<>(); //laget en arraylist
 
-        //Metoden LevelOrder(), benytter en kø laget i form av LinkedList(Delkapittel 4.2).
-        // Den skriver ut verdiene i nivåorden og med én verdi for hver iterasjon.
+        Queue <Node<T>> queue = new LinkedList<>();   // laget en kø i lenkekt Liste form
+        queue.add(rot);                             // legger inn rot vedien inn i køen til linkedList
 
+        while (!queue.isEmpty()){                   // så lenge køen ikke er tom så så kan vi ta verdiene ut fra køen og legge inn i arraylisten
+
+            Node<T> p = queue.remove();             // tar ut fra køen
+            verdier_til_Liste.add(p.verdi);         //legger inn verdi for p noden og adder det i arraylisten
+
+            if (p.venstre != null) {//hvis p.venstre node ikke er lik null så legger vi de verdiene fra subtreet inn i køen linkedlist
+                queue.add(p.venstre); //legger inn verdi for nodene som blir traversert i venstre subtree og addere det i lindeklist i nivåorden rekkefølge
+            }
+
+            if (p.høyre != null) { //hvis p.høyre node ikke er lik null så legger vi de verdiene fra subtreet inn i køen linkedlist
+                queue.add(p.høyre); //legger inn verdi for nodene som blir traversert i venstre subtree og addere det i lindeklist i nivåorden rekkefølge
+            }
+        }
+
+        return verdier_til_Liste; //returner listen med verdiene som skal inneholde verdiene i alle nodene i nivå orden til arraylisten
+        //programmer itterer til alle nodene har blitt traversert og alle node verdiene i nivåorden rekkefølgen har blitt lagt til i arraylist
+       // Programmet itterer til køen er tom og verdiene har blitt lagt inn i arraylist
 
 
         //throw new UnsupportedOperationException("Ikke kodet ennå!");
-    }
-
-    public void LevelOrder(ArrayList<T> liste)                // skal ligge i class BinTre
-    {
-        if (tom()) return;                   // tomt tre
-
-        Queue<Node<T>> queue = new LinkedList<>();   // laget en kø i linkedList form
-        queue.add(rot);                     // legger inn roten inn i køen til linkedList
-
-        while (!queue.isEmpty())                    // så lenge køen ikke er tom så så kan vi ta verdiene ut fra køen og legge inn i arraylisten
-        {
-            Node<T> p = queue.remove();             // tar ut fra køen
-            liste.add(p.verdi);
-
-            if (p.venstre != null) {//hvis p.venstre node ikke er lik null sp legger vi de verdiene fra subtreet inn i køen linkedlist
-                queue.add(p.venstre);
-            }
-
-            if (p.høyre != null) { //hvis p.høyre node ikke er lik null sp legger vi de verdiene fra subtreet inn i køen linkedlist
-                queue.add(p.høyre);
-            }
-        }
     }
 
 
