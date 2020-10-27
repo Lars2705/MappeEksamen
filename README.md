@@ -37,9 +37,24 @@ Jeg har lagret den opprinnelige kildekoden ved bruk av github detoskope og pushe
              Brukte så en while loop som kjører så lenge rot noden ikke er tom. comparer så verdiene vi har i treet med p node verdien. 
               (Altså om verdiene vi har er mindre større eller lik p.verdi). Hvis verdien somn sammenlinges med p rot node verdi er mindre =(compare value = -1),
               så traverser vi ned venstre subtree for p noden og setter den current verdien som høyre node. 
-              Eller hvis hvis nåværende verdi som sammenlignes med p rot verdien er større (compare value = 1),
-              /så traverser vi ned høyre subtree for p noden og setter den current verdien som høyre node.
+              Eller hvis hvis nåværende verdi som sammenlignes med p rot verdien er større (compare value = 1), 
+              så traverser vi ned høyre subtree for p noden og setter den current verdien som høyre node.
               Hvis compare verdiene er like for den nåværende verdien vi sammenlinger med verdien i p noden (compare value = 0),
-              plusser vi da antallLikeNode variabelen for hver node som har lik verdi. Å setter den like nodeverdien til høyre for forldrenoden vi er på (P).
-              Mot slutten så eturnere antall like forekomster verdier i treet.(AntallLikeNoder-variablem) 
+              så plusser vi da antallLikeNode-variabelen for hver node som har lik verdi. Deretter setter vi de like nodeverdiene til høyre for forldrenoden.
+              Mot slutten så eturnere antall like forekomster verdier i treet (AntallLikeNoder-variablen).  
               
+Oppgave 3a : Løste oppgave 3a førstepostorden ved å tatt utganspunkt i programkode 5.1.7 h) fra kompendie. Her er det vikig å vite at p blir definert som rotnoden. 
+           Implementerte videre at hvis p noden er tom. altså vis rotnoden er tom så har (ikke) venstre eller høyre peker en foreldre node, noe som betyr at treet ikke eksisterer.
+           Vi kaster da en kaster da en exception og sier at hele treet er tomt. Deretter setter vi at en true statment inn i en while loop som sier at så lenge dette er sant så skal loopen kjøres:
+           1) Hvis venstre barne node til foreldrenoden ikke er tom,  så skal p.venstre barne node settes til venstre subtree for foreldre noden
+           2)Eller hvis høyre barne node til foreldrenoden ikke er tom, så skal p.høyre barne node settes til høyre subtree for foreldre noden
+           3) eller hvis både venstre og høyre barne barne node er tom, så returneres første node post orden med (p) som rotnoden tilbake 
+           
+Oppgave 3b) Løse oppgave 3b-nestepostorden ved å ta ibruk fremgangsmåten for postorden fra kompendie under 5.1.7 h) - om postorden.
+            I kompendie defineres fordeldre noden som (f), men jeg valgte å definere den som parent. Starter med å
+            Definerer at parent noden er foreldre noden til p. Tar så ibruk en if statment som sier at hvis p ikke har forelder, 
+            da har ikke p en neste og vi returner null. Eller hvis hvis p er høyre barn til sin forelder, så er forelder den neste.
+            Eller hvis p er venstre barn til foreldre noden, og hvis høyre node til foreldre noden er tom, så har vi kun en venstre node for p.
+            Da er foreldre den neste node for p. Siden høyre noden for foreldre noden er tom.
+            Derimot hvis foreldre noden i tilegg har en høyre node, så er den neste vi traverserer altså neste noden som kommer etter p i postorden.
+            Vi setter da node p lik den neste noden i høyre subtreet for foreldrenoden i førstenpostoden og neste noden i postorden.

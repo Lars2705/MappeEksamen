@@ -304,61 +304,52 @@ public class EksamenSBinTre<T> {
 
     private static <T> Node<T> førstePostorden(Node<T> p) {
 
-        // Førstepostorden skal returnere første node i postorden rekkefølge med p som rot
-
         //tatt utganspunkt i programkode 5.1.7 h) fra kompendie
-        //(p blir definert som rotnoden q)
 
         if (p == null) { // hvis p noden er tom
-            //vis rotnoden er tom så har (ikke) venstre eller høyre peker en foreldre node, noe som betur at treet ikke eksisterer
+            //vis rotnoden er tom så har (ikke) venstre eller høyre peker en foreldre node, noe som betyr at treet ikke eksisterer
 
             throw new NoSuchElementException("Da er hele treet tomt");  //kaster da en exception og sier at hele treet er tomt
         }
 
         while (true) {
 
-            if (p.venstre != null) { // definerer at hvis venstre noden til foreldrenoden ikke er tom
-                p = p.venstre; // så er p venstre noden til foreldre noden
+            if (p.venstre != null) { // at hvis venstre barne node til foreldrenoden ikke er tom
+                p = p.venstre; // så er p venstre barne node til venstre subtree for foreldre noden
 
-            } else if (p.høyre != null) { // eller hvis høyre noden til foreldrenoden ikke er tom
-                p = p.høyre; //så setter vi p høyre noden til foreldre noden
+            } else if (p.høyre != null) { // eller hvis høyre barne node til foreldrenoden ikke er tom
+                p = p.høyre; //så setter vi p høyre barne node til høyre subtree for foreldre noden
 
-            } else {
-                return p; //eller hvis venstre noden eller høyre noden er null - tom så returneres kun rotnoden tilbake som her er (p)
+            } else{
+                return p; //eller hvis både venstre og høyre barne barne node er tom, så returneres første node post orden med (p) som rotnoden tilbake.
             }
         }
 
         //throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
 
-
     private static <T> Node<T> nestePostorden(Node<T> p) {
 
-        //nestePostorden skal returnere den noden som kommer etter p i postorden
+        //Tenker å ta ibruk fremgangsmåten for postorden fra kompendie under 5.1.7 h) - om postorden:
 
-        //Tenker å ta ibruk fremgangsmåten for postorden fra kompendie under 5.1.7 om postorden
-        //Kilde: under 5.1.7 h - om Postorden: I kompendie defineres fordeldre noden som (f), men jeg valgte å definere den som parent
-
-        Node<T> parent = p.forelder; //definerer at forelder er foreldre noden til p
+        Node<T> parent = p.forelder; //definerer at parent noden er foreldre noden til p
 
         if (p.forelder == null) { //hvis p ikke har forelder
             p = null; // da har ikke p en neste og vi returner null
 
-        } else if (p == parent.høyre) { //hvis p er høyre barn til sin forelder (q)
-            p = parent; // så er forelder (q) den neste
+        } else if (p == parent.høyre) { //hvis p er høyre barn til sin forelder
+            p = parent; // så er forelder den neste
 
-        } else if (parent.venstre == p) { //else hvis p er det venstre barn til foreldre noden (q)
+        } else if (parent.venstre == p) { //else hvis p er venstre barn til foreldre noden
 
-            if (parent.høyre == null) { // og hvis høyre noden til foreldre q er tom så har vi kun en venstre node for p
-                p = parent; // da er foreldre den neste node for p. Siden høyre noden for q er tom
+            if (parent.høyre == null) { // og hvis høyre node til foreldre noden er tom, så har vi kun en venstre node for p
+                p = parent; // er foreldre den neste node for p. Siden høyre noden for foreldre noden er tom
 
-            } else { //derimot hvis foreldre noden i tilegg har en høyre node så det den neste den noden som kommer først i
-                p = førstePostorden(parent.høyre); //førstenpostoden i subtreet med foreldrens noden sin høyre som rot
+            } else { //derimot hvis foreldre noden i tilegg har en høyre node så er den neste noden vi traverserer altså neste noden i postorden
+                p = førstePostorden(parent.høyre); //setter node p lik den neste noden i høyre subtreet for foreldrenoden i førstenpostoden
             }
         }
-        return p;
-
-        //finner den neste noden i postorden
+        return p;  //returner den neste noden i postorden
 
         //throw new UnsupportedOperationException("Ikke kodet ennå!");
 
