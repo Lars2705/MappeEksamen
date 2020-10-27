@@ -32,5 +32,14 @@ Jeg har lagret den opprinnelige kildekoden ved bruk av github detoskope og pushe
              Hvis treet var tomt i utgangspunktet så lages da rotnoden.  
            
 
-* Oppgave 2: ...
-
+* Oppgave 2: Løse ved å ta ibruk programkode 5.2.6 oppgave 2) fra kompendie. Definerte først node p som rot noden. Definerte så
+             variabelelen antallLike_NodeVerdier som skal plusses for hver en node med lik verdi traverseres igjennom treet.
+             Brukte så en while loop som kjører så lenge rot noden ikke er tom. comparer så verdiene vi har i treet med p node verdien. 
+              (Altså om verdiene vi har er mindre større eller lik p.verdi). Hvis verdien somn sammenlinges med p rot node verdi er mindre =(compare value = -1),
+              så traverser vi ned venstre subtree for p noden og setter den current verdien som høyre node. 
+              Eller hvis hvis nåværende verdi som sammenlignes med p rot verdien er større (compare value = 1),
+              /så traverser vi ned høyre subtree for p noden og setter den current verdien som høyre node.
+              Hvis compare verdiene er like for den nåværende verdien vi sammenlinger med verdien i p noden (compare value = 0),
+              plusser vi da antallLikeNode variabelen for hver node som har lik verdi. Å setter den like nodeverdien til høyre for forldrenoden vi er på (P).
+              Mot slutten så eturnere antall like forekomster verdier i treet.(AntallLikeNoder-variablem) 
+              

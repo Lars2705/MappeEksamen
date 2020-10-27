@@ -246,12 +246,12 @@ public class EksamenSBinTre<T> {
         while (!(p == null)) { //hvis p - rot noden ikke er tom
             int compare = comp.compare(verdi, p.verdi); //comparer verdiene vi har med p rot node verdien - Altså om verdiene vi har er mindre større eller lik p rot verdi
 
-            if (compare < 0) {  // //hvis verdien somn sammenlinges med p rot node verdi er mindre =(compare value = -1)
-                p = p.venstre; //så settes verdien inn som venstre node
+            if (compare < 0) {  // //hvis verdien somn sammenlinges med p node verdi er mindre =(compare value = -1)
+                p = p.venstre; //så traverser vi ned venstre subtree for p noden og setter den current verdien som høyre node
 
             } else if (compare > 0) { //hvis nåværende verdi som sammenlignes med p rot verdien er større (compare value = 1)
-                p = p.høyre; //så settes verdien inn som høyre node
-            } else { //hvis compare verdiene er like for den nåværende verdien vi sammenlinger med og verdien i p noden (compare value = 0)
+                p = p.høyre; //så traverser vi ned høyre subtree for p noden og setter den current verdien som høyre node
+            } else { //hvis compare verdiene er like for den nåværende verdien vi sammenlinger med verdien i p noden (compare value = 0)
 
                 antallLike_NodeVerdier++; //Det er tillatt med duplikater og det betyr at en verdi kan forekomme flere ganger.
                 //vi plusser da for hver node som har lik verdi
@@ -261,13 +261,6 @@ public class EksamenSBinTre<T> {
             }
         }
         return antallLike_NodeVerdier; //returnere antall like forekomster av verdier i treet.
-
-        // Lag kode for metoden public int antall(T verdi).
-        // Den skal returnere antall forekomster av verdi i treet.
-        // Det er tillatt med duplikater og det betyr at en verdi kan forekomme flere ganger.
-        //Hvis verdi ikke er i treet (null er ikke i treet), skal metoden returnere 0.
-        // Test koden din ved å lage trær der du legger inn flere like verdier.
-
     }
 
     public void nullstill() {
