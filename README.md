@@ -26,11 +26,11 @@ Jeg har lagret den opprinnelige kildekoden ved bruk av github detoskope og pushe
              Ved bruk av compare(sammenlinger verdi med p noden sin verdi. Ved bruk av compare har vi 3 mulige utfall. Enten -1,0 eller 1 som verdi.
              vis verdien vi sammenligner med er lavere enn node p.verdi(-1) så flytter vi peker p til venstre barn. og verdien settes som venstre barn til p noden
              Vis compare verdien er større en node p.verdi(1) så skal vi flytte pekeren til høyre side av foreldre noden.
-              Vis verdien vi legger inn er lik p.verdi betyr dette at compare verdien er lik(0) - (altså lik) og da legges noden til høyre for p noden.
+             Vis verdien vi sammenligner med p.verdi er lik, betyr dette at compare verdien er lik(0) - (altså lik) og da legges noden til høyre for p noden.
              Så referer vi til q skal være foreldre noden til p. q noden som er forelder skal ligge et nivå over barne noden p.
              For å starte traversering så må vi traversere fra foreldre noden til barne node. 
              Hvis treet var tomt i utgangspunktet så lages da rotnoden.  
            
 
 * Oppgave 2: ...
-n
+
