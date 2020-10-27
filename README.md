@@ -35,26 +35,48 @@ Jeg har lagret den opprinnelige kildekoden ved bruk av github detoskope og pushe
 * Oppgave 2: Løse ved å ta ibruk programkode 5.2.6 oppgave 2) fra kompendie. Definerte først node p som rot noden. Definerte så
              variabelelen antallLike_NodeVerdier som skal plusses for hver en node med lik verdi traverseres igjennom treet.
              Brukte så en while loop som kjører så lenge rot noden ikke er tom. comparer så verdiene vi har i treet med p node verdien. 
-              (Altså om verdiene vi har er mindre større eller lik p.verdi). Hvis verdien somn sammenlinges med p rot node verdi er mindre =(compare value = -1),
-              så traverser vi ned venstre subtree for p noden og setter den current verdien som høyre node. 
-              Eller hvis hvis nåværende verdi som sammenlignes med p rot verdien er større (compare value = 1), 
-              så traverser vi ned høyre subtree for p noden og setter den current verdien som høyre node.
-              Hvis compare verdiene er like for den nåværende verdien vi sammenlinger med verdien i p noden (compare value = 0),
-              så plusser vi da antallLikeNode-variabelen for hver node som har lik verdi. Deretter setter vi de like nodeverdiene til høyre for forldrenoden.
-              Mot slutten så eturnere antall like forekomster verdier i treet (AntallLikeNoder-variablen).  
+             (Altså om verdiene vi har er mindre større eller lik p.verdi). Hvis verdien somn sammenlinges med p rot node verdi er mindre =(compare value = -1),
+             så traverser vi ned venstre subtree for p noden og setter den current verdien som høyre node. 
+             Eller hvis hvis nåværende verdi som sammenlignes med p rot verdien er større (compare value = 1), 
+             så traverser vi ned høyre subtree for p noden og setter den current verdien som høyre node.
+             Hvis compare verdiene er like for den nåværende verdien vi sammenlinger med verdien i p noden (compare value = 0),
+             så plusser vi da antallLikeNode-variabelen for hver node som har lik verdi. Deretter setter vi de like nodeverdiene til høyre for forldrenoden.
+             Mot slutten så returnerer vi antall like forekomster verdier i treet (AntallLikeNoder-variablen).  
               
 Oppgave 3a : Løste oppgave 3a førstepostorden ved å tatt utganspunkt i programkode 5.1.7 h) fra kompendie. Her er det vikig å vite at p blir definert som rotnoden. 
-           Implementerte videre at hvis p noden er tom. altså vis rotnoden er tom så har (ikke) venstre eller høyre peker en foreldre node, noe som betyr at treet ikke eksisterer.
-           Vi kaster da en kaster da en exception og sier at hele treet er tomt. Deretter setter vi at en true statment inn i en while loop som sier at så lenge dette er sant så skal loopen kjøres:
-           1) Hvis venstre barne node til foreldrenoden ikke er tom,  så skal p.venstre barne node settes til venstre subtree for foreldre noden
-           2)Eller hvis høyre barne node til foreldrenoden ikke er tom, så skal p.høyre barne node settes til høyre subtree for foreldre noden
-           3) eller hvis både venstre og høyre barne barne node er tom, så returneres første node post orden med (p) som rotnoden tilbake 
+             Implementerte videre at hvis p noden er tom. altså vis rotnoden er tom så har (ikke) venstre eller høyre peker en foreldre node, noe som betyr at treet ikke eksisterer.
+             Vi kaster da en kaster da en exception og sier at hele treet er tomt. Deretter setter vi at en true statment inn i en while loop som sier at så lenge dette er sant så skal loopen kjøres:
+             1) Hvis venstre barne node til foreldrenoden ikke er tom, så skal p.venstre barne node settes til venstre subtree for foreldre noden
+             2)Eller hvis høyre barne node til foreldrenoden ikke er tom, så skal p.høyre barne node settes til høyre subtree for foreldre noden
+             3) eller hvis både venstre og høyre barne barne node er tom, så returneres første node post orden med (p) som rotnoden tilbake 
            
-Oppgave 3b) Løse oppgave 3b-nestepostorden ved å ta ibruk fremgangsmåten for postorden fra kompendie under 5.1.7 h) - om postorden.
-            I kompendie defineres fordeldre noden som (f), men jeg valgte å definere den som parent. Starter med å
-            Definerer at parent noden er foreldre noden til p. Tar så ibruk en if statment som sier at hvis p ikke har forelder, 
-            da har ikke p en neste og vi returner null. Eller hvis hvis p er høyre barn til sin forelder, så er forelder den neste.
-            Eller hvis p er venstre barn til foreldre noden, og hvis høyre node til foreldre noden er tom, så har vi kun en venstre node for p.
-            Da er foreldre den neste node for p. Siden høyre noden for foreldre noden er tom.
-            Derimot hvis foreldre noden i tilegg har en høyre node, så er den neste vi traverserer altså neste noden som kommer etter p i postorden.
-            Vi setter da node p lik den neste noden i høyre subtreet for foreldrenoden i førstenpostoden og neste noden i postorden.
+Oppgave 3b)  Løse oppgave 3b-nestepostorden ved å ta ibruk fremgangsmåten for postorden fra kompendie under 5.1.7 h) - om postorden.
+             I kompendie defineres fordeldre noden som (f), men jeg valgte å definere den som parent. Starter med å
+             Definerer at parent noden er foreldre noden til p. Tar så ibruk en if statment som sier at hvis p ikke har forelder, 
+             da har ikke p en neste og vi returner null. Eller hvis hvis p er høyre barn til sin forelder, så er forelder den neste.
+             Eller hvis p er venstre barn til foreldre noden, og hvis høyre node til foreldre noden er tom, så har vi kun en venstre node for p.
+             Da er foreldre den neste node for p. Siden høyre noden for foreldre noden er tom.
+             Derimot hvis foreldre noden i tilegg har en høyre node, så er den neste vi traverserer altså neste noden som kommer etter p i postorden.
+             Vi setter da node p lik den neste noden i høyre subtreet for foreldrenoden i førstenpostoden og neste noden i postorden.
+             
+Oppgave 4a)  Løste Oppgave 4a - postorden ved å ta ibruk progrmakode 5.1.7 - oppgave 7. Tankegangen min for å løse oppgaven var ifølge oppgavetesksten:  
+             1) Start med å finne den første noden p i postorden. - rot noden
+             2) Deretter vil (f.eks. i en while-løkke) setningen: p = nestePostorden(p); gi den neste. Osv. til p blir null
+             3) Du skal bruke funksjonen nestePostorden fra forrige oppgave.
+            Startet derfor med å finne den første noden p i postorden.
+            Brukete så en while løkke for å definere at så lenge rot noden p ikke er tom så skal while løkken kjøres.
+            Tok deretter å tok ibruk Interfacet oppgave som kaller på den abstracte metoden utføroppgave, som skal skrive ut verdiene som blir traversert i postorden rekkefølge til skjerm
+           
+Oppgave 4b) Løste oppgave 4b - posrordenRecursive ved å ta ibruk programkode 5.1.7 a) - fra kompendie.
+            I foskjell til programkoden fra kompendie tok jeg å:
+            kalte på metoden postoderdenrecursive i stedet for pre-orden metoden som blir gjort i (5.1.7 a fra kompendie). 
+             Gjorde dette fordi postoderdenrecursive blir da koblet til Interfacet oppgave som kaller på den abstracte metoden - utføroppgave. 
+            1) I koden så startet jeg med å definere i en if statement at hvis venstre node verdi til p noden ikke er null, så vil vi i en postorden rekkefølge
+                  traverere treet fra venstre subtree, og sende node verdiene til de nodene som blir traversert til oppgave interfacet.  
+            2) Å hvis hvis høyre node verdi til p noden ikke er null, 
+                  så skal vi traversere videre til høyre subtree og sende node verdiene til de nodene som blir traversert til oppgave interfacet 
+            3) (Både venstre å høyre subtree blir traversert i postorden rekkefølge ved å reqursivt kalle på metoden postordenRecursive)        
+            Interfacer oppgaven kaller så på den abstracte metoden utføroppgave, som skal skrive ut verdiene som blir traversert i postorden rekkefølge til skjerm      
+ 
+            
+          

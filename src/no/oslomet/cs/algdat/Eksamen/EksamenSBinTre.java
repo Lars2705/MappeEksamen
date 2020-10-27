@@ -357,15 +357,7 @@ public class EksamenSBinTre<T> {
 
     public void postorden(Oppgave<? super T> oppgave) {
 
-        //tatt ibruk progrmakode 5.1.7 - oppgave 7 fra ukesoppgaver
-
-        //tankegang:
-        // 1) Start med å finne den første noden p i postorden. - rot noden
-        // 2) Deretter vil (f.eks. i en while-løkke) setningen: p = nestePostorden(p); gi den neste. Osv. til p blir null
-        // 3) Du skal bruke funksjonen nestePostorden fra forrige oppgave.
-
-        //Målet med oppgaven er å traversere treet i post orden rekkefølge og skrive ut verdiene til nodene vi traverserer
-        //vi definerer nodene som blir passert som node p og traverser treet og skriver ut verdiene i postorden rekkefølgen helt til den siste noden p vi traverserer har null verdi
+        //tatt ibruk progrmakode 5.1.7 - oppgave 7
 
         Node<T> p = førstePostorden(rot); // Starter med å finne den første noden p i postorden
 
@@ -384,18 +376,14 @@ public class EksamenSBinTre<T> {
 
     private void postordenRecursive(Node<T> p, Oppgave<? super T> oppgave) {
 
+        // Tar ibruk programkode 5.1.7 a) fra kompendie
 
-        // Tar ibruk programkode 5.1.7 a) fra kompendie for å implementere en privat hjelpemetode som utfører rekursjonen
-
-        //kaller på metoden postoderdenrecursive i stedet for pre-orden metoden som blir gjort i (5.1.7 a fra kompendie)
-        //postoderdenrecursive blir da koblet til Interfacet oppgave som kaller på den abstracte metoden - utføroppgave
-
-        if (p.venstre != null) {//hvis venstre node verdi til (p-rot), noden ikke er null
-            postordenRecursive(p.venstre, oppgave);  //, så vil vi i en postorden rekkefølge traverere treet fra venstre barn node
+        if (p.venstre != null) {//hvis venstre node verdi til p noden ikke er null
+            postordenRecursive(p.venstre, oppgave);  // så vil vi i en postorden rekkefølge traverere treet fra venstre subtree og sende node verdiene til de nodene som blir traversert til oppgave interfacet
         }
 
-        if (p.høyre != null) { //hvis høyre node verdi til p-rot ikke er null, så
-            postordenRecursive(p.høyre, oppgave);  //så skal vi traversere videre til høyre barn
+        if (p.høyre != null) { //hvis høyre node verdi til p noden ikke er null, så
+            postordenRecursive(p.høyre, oppgave);  //så skal vi traversere videre til høyre subtree og sende node verdiene til de nodene som blir traversert til oppgave interfacet
 
         }
         oppgave.utførOppgave(p.verdi);  // Interface oppgaven kaller på den abstracte metoden utføroppgave som skal skrive ut verdiene som blir traversert i postorden rekkefølge til skjerm
