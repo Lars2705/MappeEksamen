@@ -33,4 +33,4 @@ Jeg har lagret den opprinnelige kildekoden ved bruk av github detoskope og pushe
            
 
 * Oppgave 2: ...
-
+n
