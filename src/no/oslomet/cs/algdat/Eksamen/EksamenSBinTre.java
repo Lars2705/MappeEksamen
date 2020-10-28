@@ -396,11 +396,6 @@ public class EksamenSBinTre<T> {
 
         //tar ibruk programkode 5.1.6 a) fra kompendie for å lagre fra arraylist til fil verdi  - NivOrden
 
-        //Metodene skal henholdsvis serialisere (lage et kompakt format egnet for lagring til f.eks. fil - array)
-        // 1) Selve metoden serialize skal være iterativ
-        // 2) må bruke en kø til å traversere treet i nivå orden.
-        // 3) Arrayet som returneres av serialize skal inneholde verdiene i alle nodene i nivå orden.
-
         ArrayList<T> verdier_til_Liste = new ArrayList<>(); //laget en arraylist
 
         Queue <Node<T>> queue = new LinkedList<>();   // laget en kø i lenkekt Liste form
@@ -421,9 +416,6 @@ public class EksamenSBinTre<T> {
         }
 
         return verdier_til_Liste; //returner listen med verdiene som skal inneholde verdiene i alle nodene i nivå orden til arraylisten
-        //programmer itterer til alle nodene har blitt traversert og alle node verdiene i nivåorden rekkefølgen har blitt lagt til i arraylist
-       // Programmet itterer til køen er tom og verdiene har blitt lagt inn i arraylist
-
 
         //throw new UnsupportedOperationException("Ikke kodet ennå!");
     }
