@@ -14,9 +14,25 @@ Se oblig-tekst for alle krav, og husk spesielt på følgende:
 
 # Beskrivelse av oppgaveløsning (4-8 linjer/setninger per oppgave)
 
-Vi har brukt git til å dokumentere arbeidet vårt. Jeg har 16 commits totalt, og hver logg-melding beskriver det jeg har gjort av endringer.
+Vi har brukt git til å dokumentere arbeidet vårt. Jeg har 51 commits totalt, og hver logg-melding beskriver det jeg har gjort av endringer.
 
-Jeg har lagret den opprinnelige kildekoden ved bruk av github detoskope og pushet inn
+Jeg har lagret den opprinnelige kildekoden ved bruk av github detoskope og pushet inn. 
+(Viktig!!!) - Min Hoved branch heter ("Main") og ikke ("Master") på github detoskope.
+
+Warnings i EksamenSBinTre klassen: Jeg har totalt 5 warnings i java klassen min
+
+2/5 warnings - (kommer av Non-ASCII characters in an identifier) 
+Disse kommer av at "høyre" og "førstepostorden" begge inneholder bokstaven (Ø).
+
+1/5 warnings - (Private field 'endringer' is assigned but never accessed)
+Jeg tar ikke å bruker verdien fra endringer i noen av oppgavne selv om den kpden inn som en hjelpevariabel.
+
+1/5 warnings - (Return value of the method is never used) - for boolean legginn metoden()
+Jeg returnerer true value tilbake, men får likevel opp feilmelding om at verdien true som blir sendt tilbake ikke blir brukt.
+
+1/5 warnings - (Method 'inneholder(T)' is never used)
+Jeg tar aldri i bruk hjelemetoden inneholder(T) som allerde er ferdigkodet i en løsningene mine for de ulike oppgavene.
+
 
 *oppgave 0: Løste ved å implementere en Test_klasse for Mianmetoder.
             Kjørte deretter instanser av klassen EksamensBinTre som ble opgitt igjennom main metoden.
@@ -24,35 +40,28 @@ Jeg har lagret den opprinnelige kildekoden ved bruk av github detoskope og pushe
             Gjorde deretter det samme for oppgave 1, 2 og 6. 
 
 * Oppgave 1: Løste ved å implementere programkoden 5.2.3 a) som er hentet fra kompendie:
-             Har videre lagt til korrekt foreldre referanse.
-             Brukte de to nodereferanseere p og q. 
-             Definerer p som barn og q som forelder. 
-             P starter på rotnoden. 
-             Ved bruk av compare(sammenlinger verdi med p noden sin verdi. 
-             Ved bruk av compare har vi 3 mulige utfall.
-             Enten -1,0 eller 1 som verdi.
+             Brukte to nodereferanseere p og q, og definerer p som barn og q som forelder.(P starter på rotnoden) 
+             Ved bruk av compare (sammenlinger bi verdien vi legger inn med p.noden sin verdi) 
+             Ved bruk av compare har vi 3 mulige utfall.(Enten -1,0 eller 1 som verdi)
              vis verdien vi sammenligner med er lavere enn node p.verdi(-1) så flytter vi peker p til venstre barn, og verdien settes som venstre barn til p noden.
              Vis compare verdien er større en node p.verdi(1) så skal vi flytte pekeren til høyre side av foreldre noden.
              Vis verdien vi sammenligner med p.verdi er lik, betyr dette at compare verdien er lik(0) - (altså lik) og da legges noden til høyre for p noden.
-             Så referer vi til q skal være foreldre noden til p. 
-             q noden som er forelder skal ligge et nivå over barne noden p.
-             For å starte traversering så må vi traversere fra foreldre noden til barne node. 
+             Deretter referer vi til at q skal være foreldre noden til p.(q noden som er forelder skal ligge et nivå over barne noden p)
              Hvis treet var tomt i utgangspunktet så lages da rotnoden.  
            
 
 * Oppgave 2: Løse ved å ta ibruk programkode 5.2.6 oppgave 2) fra kompendie: 
              Definerte først node p som rot noden. 
-             Definerte så variabelelen antallLike_NodeVerdier som skal plusses for hver en node med lik verdi traverseres igjennom treet.
+             Definerte så variabelelen antallLike_NodeVerdier som skal plusses for hver gang en verdi sammenlignes med en lik node verdi i treet.
              Brukte så en while loop som kjører så lenge rot noden ikke er tom. 
-             comparer så verdiene vi har i treet med p node verdien. 
-             (Altså om verdiene vi har er mindre større eller lik p.verdi). 
-             Hvis verdien som sammenlinges med p rot node verdi er mindre =(compare value = -1), så traverser vi ned venstre subtree for p noden og setter den current verdien som høyre node. 
-             Eller hvis hvis nåværende verdi som sammenlignes med p rot verdien er større (compare value = 1), så traverser vi ned høyre subtree for p noden og setter den current verdien som høyre node.
-             Hvis compare verdiene er like for den nåværende verdien vi sammenlinger med verdien i p noden (compare value = 0),  så plusser vi da antallLikeNode-variabelen for hver node som har lik verdi. 
-             Deretter setter vi de like nodeverdiene til høyre for forldrenoden.
-             Mot slutten så returnerer vi antall like forekomster verdier i treet (AntallLikeNoder-variablen).  
+             comparer så de generiske verdiene vi setter inn med verdien til rot noden p. 
+             Hvis compare value = -1 så traverser vi ned venstre subtree for p noden og sammenlinger current verdien med verdiene i venstre subtree. 
+             Eller hvis compare value = 1, så traverser vi ned høyre subtree for p noden og sammenlinger current verdien med verdiene i høyre subtree.
+             Hvis compare value = 0, e, så plusser vi da antallLikeNode-variabelen for hver node som har lik verdi. 
+             Deretter setter vi de like nodeverdiene til høyre for forldrenoden som inneholder lik verdi og returnerer antall like forekomster verdier i treet.
+             
               
-Oppgave 3a : Løste oppgave 3a førstepostorden ved å tatt utganspunkt i programkode 5.1.7 h) fra kompendie:
+* Oppgave 3a : Løste oppgave 3a førstepostorden ved å ta utganspunkt i programkode 5.1.7 h) fra kompendie:
              Her er det vikig å vite at p blir definert som rotnoden. 
              Implementerte videre at hvis p noden er tom. 
              Altså vis rotnoden er tom så har (ikke) venstre eller høyre peker en foreldre node, noe som betyr at treet ikke eksisterer.
@@ -62,52 +71,57 @@ Oppgave 3a : Løste oppgave 3a førstepostorden ved å tatt utganspunkt i progra
              2)Eller hvis høyre barne node til foreldrenoden ikke er tom, så skal p.høyre barne node settes til høyre subtree for foreldre noden.
              3) eller hvis både venstre og høyre barne barne node er tom, så returneres første node post orden med (p) som rotnoden tilbake. 
            
-Oppgave 3b)  Løse oppgave 3b-nestepostorden ved å ta ibruk fremgangsmåten for postorden fra kompendie under 5.1.7 h) - om postorden:
-             I kompendie defineres fordeldre noden som (f), men jeg valgte å definere den som parent.
+* Oppgave 3b)  Løse oppgave 3b-nestepostorden ved å ta ibruk fremgangsmåten for postorden fra kompendie under 5.1.7 h) - om postorden:
               Starter med å, definerer at parent noden er foreldre noden til p. 
               Tar så ibruk en if statment som sier at hvis p ikke har forelder, da har ikke p en neste og vi returner null. 
               Eller hvis hvis p er høyre barn til sin forelder, så er forelder den neste.
-             Eller hvis p er venstre barn til foreldre noden, og hvis høyre node til foreldre noden er tom, så har vi kun en venstre node for p.
-             Da er foreldre den neste node for p. Siden høyre noden for foreldre noden er tom.
-             Derimot hvis foreldre noden i tilegg har en høyre node, så er den neste vi traverserer altså neste noden som kommer etter p i postorden.
-             Vi setter da node p lik den neste noden i høyre subtreet for foreldrenoden i førstenpostoden og neste noden i postorden.
+              Eller hvis p er venstre barn til foreldre noden, og hvis høyre node til foreldre noden er tom, så har vi kun en venstre node for p.
+              Da er foreldre den neste node for p. Siden høyre noden for foreldre noden er tom.
+              Derimot hvis foreldre noden i tilegg har en høyre node, så er den neste vi traverserer altså neste noden som kommer etter p i postorden.
+              Vi setter da node p lik den neste noden i høyre subtreet for foreldrenoden i førstenpostoden og neste noden i postorden.
              
-Oppgave 4a)  Løste Oppgave 4a - postorden ved å ta ibruk progrmakode 5.1.7 - oppgave 7:
-             Tankegangen min for å løse oppgaven var ifølge oppgavetesksten:  
-               1) Start med å finne den første noden p i postorden. - rot noden
-               2) Deretter vil (f.eks. i en while-løkke) setningen: p = nestePostorden(p); gi den neste. Osv. til p blir null
-               3) Du skal bruke funksjonen nestePostorden fra forrige oppgave.
-            Startet derfor med å finne den første noden p i postorden.
+* Oppgave 4a) Løste Oppgave 4a - postorden ved å ta ibruk programkode 5.1.7 - oppgave 7:
+            Startet med å finne den første noden p i postorden.
             Brukete så en while løkke for å definere at så lenge rot noden p ikke er tom så skal while løkken kjøres.
-            Tok deretter å tok ibruk Interfacet oppgave som kaller på den abstracte metoden utføroppgave, som skal skrive ut verdiene som blir traversert i postorden rekkefølge til skjerm
+            Tok deretter å tok ibruk Interfacet oppgave som kaller på den abstracte metoden utføroppgave 
+            Denne abstracte metoden skriver ut verdiene som blir traversert i postorden rekkefølge til skjerm
            
-Oppgave 4b) Løste oppgave 4b - posrordenRecursive ved å ta ibruk programkode 5.1.7 a) - fra kompendie.
+* Oppgave 4b) Løste oppgave 4b - posrordenRecursive ved å ta ibruk programkode 5.1.7 a) - fra kompendie:
                      1) I koden så startet jeg med å definere i en if statement at hvis venstre node verdi til p noden ikke er null.
-                        så vil vi i en postorden rekkefølge traverere treet fra venstre subtree, og sende node verdiene til de nodene som blir traversert til oppgave interfacet.  
+                         så vil vi i en postorden rekkefølge traverere treet fra venstre subtree, og sende verdiene til de nodene som blir traversert til oppgave interfacet.  
                      2) Å hvis hvis høyre node verdi til p noden ikke er null.
-                        så skal vi traversere videre til høyre subtree og sende node verdiene til de nodene som blir traversert til oppgave interfacet. 
-                     3) (Både venstre å høyre subtree blir traversert i postorden rekkefølge ved å reqursivt kalle på metoden postordenRecursive)        
+                         så skal vi traversere videre til høyre subtree og sende verdiene til de nodene som blir traversert til oppgave interfacet. 
+                     3)Både venstre å høyre subtree blir traversert i postorden rekkefølge ved å reqursivt kalle på metoden postordenRecursive        
                          Interfacer oppgaven kaller så på den abstracte metoden utføroppgave, som skal skrive ut verdiene som blir traversert i postorden rekkefølge til skjerm 
-                     Viktig!
-                     I forskjell til programkoden fra kompendie tok jeg å: 
-                      -kalte på metoden postoderdenrecursive i stedet for pre-orden metoden som blir gjort i (5.1.7 a fra kompendie)). 
-                      -Gjorde dette fordi postoderdenrecursive blir da koblet til Interfacet oppgave som kaller på den abstracte metoden - utføroppgave)         
- 
- Oppgave 5a) Løste oppgave 5a - seralize() ved å ta ibruk programkode tar ibruk programkode 5.1.6 a) fra kompendie for å lagre fra arraylist til fil verdi  - NivOrden.
+
+* Oppgave 5a) Løste oppgave 5a - seralize() ved å ta ibruk programkode tar ibruk programkode 5.1.6 a) fra kompendie 
              Startet med å implementere en arraylist som jeg kalte (verdier_til_Liste).
-             Laget deretter en kø i lenkekt Liste form.
-             Lå deretter inn rot vedien inn i køen til linkedList.
+             Laget deretter en kø i lenkekt Liste form og lå deretter inn rot vedien inn i køen til linkedList.
              Brukte deretter en while løkke som sier at så lenge køen ikke er tom så så kan vi ta verdiene ut fra køen og legge inn i arraylisten.
-             Definerte så node p og tar den ut fra køen, og legger inn verdi for de ulike p noden som blir traversert og adder det i arraylisten.
-             Tok deretter ibruk en if statement som sier at hvis p.venstre node ikke er lik null så legger vi inn verdiene fra subtreet inn i køen linkedlist.
-             Legger da inn verdi for noden som blir traversert i venstre subtree og addere det i lindeklist i nivåorden rekkefølge.
-             Tok på lik måte å definere i en annen if statment at hvis p.høyre node ikke er lik null så legger vi de verdiene fra subtreet inn i køen linkedlist. 
-             Vi legger da inn verdi for nodene som blir traversert i venstre subtree og addere det i lindeklist i nivåorden rekkefølge.
-             Deretter så returner vi Linked listen som skal inneholde verdiene i alle nodene som ble traversert i nivåorden rekkefølge og legger det i arraylisten.  
+             Tok deretter ibruk to if-statement som sier at hvis p.venstre/p.høyre node ikke er lik null så,
+             legger vi inn verdiene fra venstre/høyre subtreet som ble traversert i nivåorden rekkefølge inn i køen linkedlist.
+             Deretter så returner vi køen som skal inneholde verdiene i alle nodene som ble traversert i nivåorden rekkefølge og legger det inn i arraylisten.  
              Programmet itterer til køen er tom og verdiene har blitt lagt inn i arraylist.
              
- Oppgave 5b) Løste oppgave 5b - deseralise() ved å ta ibruk programkode 5.2.3 c fra kompendie:
-             Implementere løsningen ved ta ibruk EksamenSBinTre som Constructior som tar inn komparatoren c for typen T.
+* Oppgave 5b) Løste oppgave 5b - deseralise() ved å ta ibruk programkode 5.2.3 c fra kompendie:
+             Implementere løsningen ved ta ibruk EksamenSBinTre som Constructør som tar inn komparatoren c for typen T.
              Tok deretter å bygget opp et tre ved å hente én og én verdi fra arraylisten og bygger opp treet i nivåorden
              Returnerer deretter det ferdigbyggede treet.
-                       
+ 
+* oppgave 6a) 
+ 
+* Oppgave 6b) Løste oppgave ved å ta ibruk programkode - 5.2.8 oppgave 5 fra kompendie for fjernalle metoden
+            Starter med å lage en if statment som sier at hvis treet er tomt, så skal 0 returneres.
+            Definer så en int hjelpevariabel AntallSomBleFjernet. 
+            Går deretter igjennom en while loop som skal fjerne alle forekomstene av (verdi) i treet.
+            For hver verdi som ble fjernet så skal metoden skal returnere antallet som ble fjernet (plusser AntallSomBleFjernet variabelen)
+            Vi returnerer så hjelpevariabelen tilbake med antallet som ble fjernet. 
+ 
+ 
+* Løste oppgave 6c) - nullstill() ved å ta utgangspunkt i programkode - oppgave 5 fra 5.2.8 fra kompendie                        
+            Definerer først at rot noden er lik node p og kjører igjennom en if statment som sier at hvis noden ikke er tom så:
+            1)så sender vi noden p igjennom hjelpetoden for å slette verdiene i treet, og kaller på metoden slett - (rekursivt)
+            Tar ibruk hjelpemetoden slett som sier at hvis høyre/venstre peker node fra rot noden ikke er null så: 
+            1) Fjern Høyre subtree som er til høyre for rotnodem
+            2) fjern venstre subtree som er til venstre for rotnoden 
+            3)Setter så verdien i selve p noden lik null, og tilbake til nullstill metoden og setter rot noden sin verdi lik null og setter antall noder lik 0    
