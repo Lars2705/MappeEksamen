@@ -136,42 +136,50 @@ public class EksamenSBinTre<T> {
         // verdi i alle noder etter en fjerning
 
 
-        //Har implementert programkode 5.2.8 d) fra kompendie
+        //Henter programkode 5.2.8 d) fra kompendie
         if (verdi == null) {
             return false;
         } // treet har ingen nullverdier
 
 
-        Node<T> p = rot, q = null;   // q skal være forelder til p, p = rot verdien og q er null
+        Node<T> p = rot, q = null;   // q skal være forelder til p
         // q blir får foreldre referanse
 
 
-        while (p != null)            // hvis rot verdien p ikke er null
+        while (p != null)   // leter etter at noden inneholder en verdi
         {
-            int compare = comp.compare(verdi, p.verdi);      // sammenlinger verdiene med p.rot verdi
+            int compare = comp.compare(verdi, p.verdi); // sammenlinger verdi som settes inn med p.node verdi
+
+            //går til venstre
             if (compare < 0) { //hvis compare verdien er mindre = -1
                 q = p; // q noden blir rot verdien og videre forelder til p
-                p = p.venstre; // så går vi til venstre og venstre barne node får refereansen node p
+                p = p.venstre; // venstre barne node får refereansen node p
+
+                //går til høyre
             } else if (compare > 0) { //hvis compare verdieen er større = 1
                 q = p;  //q noden blir rot verdien og videre forelder til p
                 p = p.høyre; // og høyre barne node for referansen p
-            } else
+
+
+            } else //den søkte verdien ligger i p så vi går ut aa while loopen
                 break;    // hvis verdien vi comparer med p noden er lik (0) så har vi funnet den noden p med lik verdi
         }
-        if (p == null) { //hvis node p verdi er lik null
-            return false;   // så finner vi ikke verdi
+
+        if (p == null) { // hvis vi ikke finner ikke verdi
+            return false;   // så retunrer vi false
         }
 
 
-        //hvis p ikke har et barn eller har nøyaktig 1 barn
+        //hvis p ikke har barn eller har nøyaktig 1 barn
         if (p.venstre == null || p.høyre == null)  // Tilfelle 1) og 2)
         {
-            Node<T> b; //lager node barnet b
+            Node<T> b; //lager barn noden b
 
-            if (p.venstre != null) { //hvis p sin venstre node ikke er null, så får barne node b referansen til p sin venstre node
+            if (p.venstre != null) { // Hvis p har venstre barn, så får barne node b referansen til p sin venstre node
                 b = p.venstre;
-            } else { //hvis p.venstre har null verdi etter en fjerning
-                b = p.høyre; //så settes barne noden b sin referanse til p sin høyre node
+
+            } else { //så settes barne noden b sin referanse til p sin høyre node og blir høyre barmet til p
+                b = p.høyre;
             }
 
             if (b != null) { //hvis da b node verdi ikke er tom
@@ -181,16 +189,19 @@ public class EksamenSBinTre<T> {
             if (p == rot) { //hvis p er rot noden
                 rot = b;  //så settes rotreferansen til b som enten er p.venstre, p.høyre eller null
 
-            } else if (p == q.venstre) { // hvis foreldre noden q sin venstre er lik node p
-                q.venstre = b; //så settes rotreferansen til b lik q.venstre = p.venstre
+            } else if (p == q.venstre) { // Hvis p er venstre barnet til q
+                q.venstre = b; //så settes q.venstre som forelder til b
 
-            } else { //eller hvis p ikke er lik foreldrenoden q sitt venstre barn
-                q.høyre = b; //så må
+            } else { //Derimot hvis p ikke er venstre barnet til q
+                q.høyre = b; //så settes q.høyre som forelder til b
             }
 
+            // Hvis p har 2 barn
         } else { // Tilfelle 3) //hvis p.venstre og p.høyre ikke er null etter fjern
 
             Node<T> s = p, r = p.høyre;   // finner neste i inorden
+
+            // traverser ned r sin venstre side
             while (r.venstre != null) {
                 s = r;    // s er forelder til r
                 r = r.venstre;
@@ -202,12 +213,12 @@ public class EksamenSBinTre<T> {
                 r.høyre.forelder = s; // så må foreldre noden til r.høyre node være s
             }
 
-            if (s != p) { //hvis noden p ikke er lik foreldre noden s
-                s.venstre = r.høyre;
-                //  s.venstre = null; //så setter vi at venstre peker noden til s må være null
+
+            if (s != p) {  // Hvis s ikke peker på p
+                s.venstre = r.høyre; // så Setter S sin venstre peker over til r sitt høyre barn
 
 
-            } else { //hvis foreldre noden S er lik p
+            } else { //Eller hvis s peker på p
                 s.høyre = r.høyre; // så setter vi foreldre noden s.høyre node verdi lik node r.høyre sin verdi
 
 
@@ -215,7 +226,7 @@ public class EksamenSBinTre<T> {
         }
 
         antall--;   // det er nå én node mindre i treet
-        endringer++;
+        endringer++; // Øker med antall endringer
         return true;
 
         //throw new UnsupportedOperationException("Ikke kodet ennå!");
