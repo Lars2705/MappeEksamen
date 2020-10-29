@@ -72,7 +72,7 @@ kommer av at jeg aldri bruker hjelemetoden inneholder(T) som allerde er ferdigko
              Deretter setter vi at en true statment inn i en while loop som sier at så lenge dette er sant så skal loopen kjøres:
              1) Hvis venstre barne node til foreldrenoden ikke er tom, så skal p.venstre barne node settes til venstre subtree for foreldre noden.
              2)Eller hvis høyre barne node til foreldrenoden ikke er tom, så skal p.høyre barne node settes til høyre subtree for foreldre noden.
-             3) eller hvis både venstre og høyre barne barne node er tom, så returneres første node post orden med (p) som rotnoden tilbake. 
+             3) eller hvis både venstre og høyre barne barne node er tom, så returneres første node post orden med p som rotnoden tilbake. 
            
 * Oppgave 3b)  Løse oppgave 3b-nestepostorden ved å ta ibruk fremgangsmåten for postorden fra kompendie under 5.1.7 h) - om postorden - (7 linjer under):
               Starter med å, definerer at parent noden er foreldre noden til p. 
