@@ -32,7 +32,7 @@ Kommer av at jeg ikke bruker verdien fra endringer i noen av oppgavne selv om de
 3) - 1/5 warnings - (kommer av Return value of the method is never used) - for boolean legginn metoden()
 Kommer av at geg returnerer true value tilbake, men får likevel opp feilmelding om at verdien true som blir sendt tilbake ikke blir brukt.
 
-4) - 1/5 warnings - komemr av (Method 'inneholder(T)' is never used)
+4) - 1/5 warnings - kommer av (Method 'inneholder(T)' is never used)
 kommer av at jeg aldri bruker hjelemetoden inneholder(T) som allerde er ferdigkodet i en løsningene mine for de ulike oppgavene.
 
 # Forklaring for hvordan jeg løste oppgavene:
