@@ -133,6 +133,6 @@ kommer av at jeg aldri bruker hjelemetoden inneholder(T) som allerde er ferdigko
             Definerer først at rot noden er lik node p og kjører igjennom en if statment som sier at hvis noden ikke er tom så:
             1)så sender vi noden p igjennom hjelpetoden for å slette verdiene i treet, og kaller på metoden slett - (rekursivt)
             Tar ibruk hjelpemetoden slett som sier at hvis høyre/venstre peker node fra rot noden ikke er null så: 
-            1) Fjern Høyre subtree som er til høyre for rot noden
-            2) fjern venstre subtree som er til venstre for rot noden 
+            1) Fjern Høyre subtree som er til høyre for rotnodem
+            2) fjern venstre subtree som er til venstre for rotnoden 
             3)Setter så verdien i selve p noden lik null, og tilbake til nullstill metoden og setter rot noden sin verdi lik null og setter antall noder lik 0    
