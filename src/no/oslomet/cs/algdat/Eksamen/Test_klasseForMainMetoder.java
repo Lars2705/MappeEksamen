@@ -4,7 +4,7 @@ import java.util.Comparator;
 
 public class Test_klasseForMainMetoder {
 
-    public static void main(String args[]){
+    public static void main(String args[]) {
 
         /*
     For at det skal virke må grensesnittet Beholder være tilgjengelige. Lag så noen instanser av
@@ -40,7 +40,7 @@ public class Test_klasseForMainMetoder {
         System.out.println(tre.antall()); // Utskrift: 10
  */
 
-           //oppgave 2
+        //oppgave 2
 /*
         Integer[] a = {4,7,2,9,4,10,8,7,4,6};
         EksamenSBinTre<Integer> tre = new EksamenSBinTre<>(Comparator.naturalOrder());
@@ -57,20 +57,18 @@ public class Test_klasseForMainMetoder {
 
         // tester for oppgave 6
 
-        int[] a = {4,7,2,9,4,10,8,7,4,6,1};
+        int[] a = {4, 7, 2, 9, 4, 10, 8, 7, 4, 6, 1};
         EksamenSBinTre<Integer> tre = new EksamenSBinTre<>(Comparator.naturalOrder());
         for (int verdi : a) tre.leggInn(verdi);
 
         System.out.println(tre.fjernAlle(4)); // 3
-        tre.fjernAlle(7); tre.fjern(8);
+        tre.fjernAlle(7);
+        tre.fjern(8);
         System.out.println(tre.antall()); // 5
-      //  System.out.println(tre + " " + tre.toString());
+        //  System.out.println(tre + " " + tre.toString());
 
         // [1, 2, 6, 9, 10] [10, 9, 6, 2, 1]
         // OBS: Hvis du ikke har gjort oppgave 4 kan du her bruke toString()
-
-
-
 
 
     }

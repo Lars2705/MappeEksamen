@@ -138,41 +138,54 @@ public class EksamenSBinTre<T> {
 
         //Har implementert programkode 5.2.8 d) fra kompendie
         if (verdi == null) {
-            return false;  // treet har ingen nullverdier
-        }
+            return false;
+        } // treet har ingen nullverdier
 
-        Node<T> p = rot, q = null;   // q skal være forelder til p
 
-        while (p != null)            // leter etter verdi
+        Node<T> p = rot, q = null;   // q skal være forelder til p, p = rot verdien og q er null
+        // q blir får foreldre referanse
+
+
+        while (p != null)            // hvis rot verdien p ikke er null
         {
-            int compare = comp.compare(verdi, p.verdi);      // sammenligner
-            if (compare < 0) {
-                q = p;
-                p = p.venstre; // går til venstre
-            } else if (compare > 0) {
-                q = p;
-                p = p.høyre; // går til høyre
-            } else break;    // den søkte verdien ligger i p
+            int compare = comp.compare(verdi, p.verdi);      // sammenlinger verdiene med p.rot verdi
+            if (compare < 0) { //hvis compare verdien er mindre = -1
+                q = p; // q noden blir rot verdien og videre forelder til p
+                p = p.venstre; // så går vi til venstre og venstre barne node får refereansen node p
+            } else if (compare > 0) { //hvis compare verdieen er større = 1
+                q = p;  //q noden blir rot verdien og videre forelder til p
+                p = p.høyre; // og høyre barne node for referansen p
+            } else
+                break;    // hvis verdien vi comparer med p noden er lik (0) så har vi funnet den noden p med lik verdi
         }
-        if (p == null) {
-            return false;   // finner ikke verdi
+        if (p == null) { //hvis node p verdi er lik null
+            return false;   // så finner vi ikke verdi
         }
 
+
+        //hvis p ikke har et barn eller har nøyaktig 1 barn
         if (p.venstre == null || p.høyre == null)  // Tilfelle 1) og 2)
         {
-            Node<T> b = p.venstre != null ? p.venstre : p.høyre;  // b for barn
-            if (b != null) { //hvis venstre barne node verdi ikke er tom etter en fjerning
-                b.forelder = q; // så setter setter vi pekeren fra barne noden b til foreldre noden q
-            }                   //foreldre noden q for lik verdi som barne noden b
+            Node<T> b; //lager node barnet b
 
-            if (p == rot) {
-                rot = b;
+            if (p.venstre != null) { //hvis p sin venstre node ikke er null, så får barne node b referansen til p sin venstre node
+                b = p.venstre;
+            } else { //hvis p.venstre har null verdi etter en fjerning
+                b = p.høyre; //så settes barne noden b sin referanse til p sin høyre node
+            }
 
-            } else if (p == q.venstre) {
-                q.venstre = b;
+            if (b != null) { //hvis da b node verdi ikke er tom
+                b.forelder = q; // så setter vi pekeren fra barne noden b til foreldre noden q
+            }                   //noden q blir foreldre til barne noden b
 
-            } else {
-                q.høyre = b;
+            if (p == rot) { //hvis p er rot noden
+                rot = b;  //så settes rotreferansen til b som enten er p.venstre, p.høyre eller null
+
+            } else if (p == q.venstre) { // hvis foreldre noden q sin venstre er lik node p
+                q.venstre = b; //så settes rotreferansen til b lik q.venstre = p.venstre
+
+            } else { //eller hvis p ikke er lik foreldrenoden q sitt venstre barn
+                q.høyre = b; //så må
             }
 
         } else { // Tilfelle 3) //hvis p.venstre og p.høyre ikke er null etter fjern
@@ -223,7 +236,7 @@ public class EksamenSBinTre<T> {
             return 0;
         }
 
-        int AntallSomBleFjernet = 0;
+        int AntallSomBleFjernet = 0; //hjelpevariabel
 
         while (fjern(verdi)) { // Den skal fjerne alle forekomstene av (verdi) i treet.
 
@@ -281,6 +294,7 @@ public class EksamenSBinTre<T> {
 
             rot = null; //setter rot noden sin verdi lik 0
             antall = 0; //setter antall noder lik 0
+
         }
 
     }
@@ -306,6 +320,11 @@ public class EksamenSBinTre<T> {
 
         //tatt utganspunkt i programkode 5.1.7 h) fra kompendie
 
+        //    Tankegangen min for å løse oppgaven var ifølge oppgavetesksten:
+        //  1) Start med å finne den første noden p i postorden. - rot noden
+        //  2) Deretter vil (f.eks. i en while-løkke) setningen: p = nestePostorden(p); gi den neste. Osv. til p blir null
+        //  3) Du skal bruke funksjonen nestePostorden fra forrige oppgave.
+
         if (p == null) { // hvis p noden er tom
             //vis rotnoden er tom så har (ikke) venstre eller høyre peker en foreldre node, noe som betyr at treet ikke eksisterer
 
@@ -320,7 +339,7 @@ public class EksamenSBinTre<T> {
             } else if (p.høyre != null) { // eller hvis høyre barne node til foreldrenoden ikke er tom
                 p = p.høyre; //så setter vi p høyre barne node til høyre subtree for foreldre noden
 
-            } else{
+            } else {
                 return p; //eller hvis både venstre og høyre barne barne node er tom, så returneres første node post orden med (p) som rotnoden tilbake.
             }
         }
@@ -398,10 +417,10 @@ public class EksamenSBinTre<T> {
 
         ArrayList<T> verdier_til_Liste = new ArrayList<>(); //laget en arraylist
 
-        Queue <Node<T>> queue = new LinkedList<>();   // laget en kø i lenkekt Liste form
+        Queue<Node<T>> queue = new LinkedList<>();   // laget en kø i lenkekt Liste form
         queue.add(rot);                             // legger inn rot vedien inn i køen til linkedList
 
-        while (!queue.isEmpty()){                   // så lenge køen ikke er tom så så kan vi ta verdiene ut fra køen og legge inn i arraylisten
+        while (!queue.isEmpty()) {                   // så lenge køen ikke er tom så så kan vi ta verdiene ut fra køen og legge inn i arraylisten
 
             Node<T> p = queue.remove();             // tar ut fra køen
             verdier_til_Liste.add(p.verdi);         //legger inn verdi for p noden og adder det i arraylisten
