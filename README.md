@@ -77,7 +77,7 @@ kommer av at jeg aldri bruker hjelemetoden inneholder(T) som allerde er ferdigko
               Tar så ibruk en if statment som sier at hvis p ikke har forelder, da har ikke p en neste og vi returner null. 
               Hvis hvis p er høyre barn til sin forelder, så er forelder den neste i postorden.
               Derimot hvis p er venstre barn til foreldre noden, og vi vet at p noden er et enebarn , så vet vi at neste noden i postorden er foreldrenoden til p. 
-              Hvis foreldre noden i tilegg har en høyre node, så er den neste vi traverserer altså noden som kommer først i postorden i subtreet
+              Hvis foreldre noden i tilegg har en høyre node, så er den neste vi traverserer til altså noden som kommer først i postorden i subtreet
       
              
 * Oppgave 4a) Løste Oppgave 4a - postorden ved å ta ibruk programkode 5.1.7 - oppgave 7 - (4 linjer under):
@@ -129,5 +129,5 @@ kommer av at jeg aldri bruker hjelemetoden inneholder(T) som allerde er ferdigko
             Setter noden p som rot node og kjører igjennom en if statment som sier at hvis noden ikke er tom så:
             1)så sender vi p igjennom hjelpetoden for å slette verdiene i treet, og kaller på metoden slett - (rekursivt)
             Tar ibruk hjelpemetoden slett som sier at hvis høyre/venstre peker node fra rot noden ikke er null så: 
-            1)Traverser høyre subtree/venstre subtree og sett verdienene som er til høyre/venstre for rotnoden lik null 
+            1)Traverser høyre/venstre subtree og setter verdienene som er til høyre/venstre for rotnoden lik null 
             2)Setter så verdien i selve p noden lik null, og vi går tilbake til nullstill metoden og setter rot noden sin verdi lik null og setter antall noder lik 0 i treet    

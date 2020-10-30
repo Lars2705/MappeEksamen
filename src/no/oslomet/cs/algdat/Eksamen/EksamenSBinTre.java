@@ -124,12 +124,10 @@ public class EksamenSBinTre<T> {
 
     public boolean fjern(T verdi) {
 
-
         //Henter programkode 5.2.8 d) fra kompendie
         if (verdi == null) {
             return false;
         } // treet har ingen nullverdier
-
 
         Node<T> p = rot, q = null;   // q skal være forelder til p
 
@@ -138,19 +136,15 @@ public class EksamenSBinTre<T> {
         {
             int compare = comp.compare(verdi, p.verdi);  // sammenlinger verdi som settes inn med p.node verdi
 
-
-            if (compare < 0) { //går til venstre - (compare value = -1)
+            if (compare < 0) { //går til venstre - (compare value = -1) og venstre barne node får refereansen node p
                 q = p;
-                p = p.venstre; // venstre barne node får refereansen node p
+                p = p.venstre;
 
-
-            } else if (compare > 0) { //går til høyre - (compare value = 1)
+            } else if (compare > 0) { //går til høyre - (compare value = 1) og høyre barne node for referansen p
                 q = p;
-                p = p.høyre; // og høyre barne node for referansen p
+                p = p.høyre;
 
-
-                //Hvis verdien ligger i p, så vi går ut av while loopen
-            } else
+            } else  //Hvis verdien ligger i p, så vi går ut av while løkken
                 break;
         }
 
@@ -163,33 +157,27 @@ public class EksamenSBinTre<T> {
         if (p.venstre == null || p.høyre == null)  // Tilfelle 1) og 2) -
         {
 
-            //lager barn noden b
-            Node<T> b;
+            Node<T> b; //lager barn noden b
 
-            // Hvis p har venstre barn, så får barne node b referansen til p sin venstre node
-            if (p.venstre != null) {
+            if (p.venstre != null) {  // Hvis p har venstre barn, så får barne node b referansen til p sin venstre node
                 b = p.venstre;
 
-                //Hvis p har høyre barn, så får node b referanse til p sin høyre
-            } else {
+            } else {  //Hvis p har høyre barn, så får node b referanse til p sin høyre
                 b = p.høyre;
             }
 
-            //setter pekeren fra barne noden b til foreldre noden q hvis node b ikke er tom
-            if (b != null) {
+            if (b != null) {  //setter pekeren fra barne noden b til foreldre noden q hvis node b ikke er tom
                 b.forelder = q;
             }
 
-            //hvis p er rot noden så settes rotreferansen til b lik( enten er p.venstre, p.høyre eller null)
-            if (p == rot) {
+            if (p == rot) { //hvis p er rot noden så settes rotreferansen til b lik( enten er p.venstre, p.høyre eller null)
                 rot = b;
 
-                // Hvis p er venstre barnet til q så settes q.venstre som forelder til b
-            } else if (p == q.venstre) {
+            } else if (p == q.venstre) { // Hvis p er venstre barnet til q så settes q.venstre som forelder til b
                 q.venstre = b; //
 
-                //Hvis p ikke er venstre barnet til q //så settes q.høyre som forelder til b
-            } else {
+
+            } else { //Hvis p ikke er venstre barnet til q //så settes q.høyre som forelder til b
                 q.høyre = b;
             }
 
@@ -198,8 +186,7 @@ public class EksamenSBinTre<T> {
 
             Node<T> s = p, r = p.høyre;   // finner neste i inorden
 
-            // traverser ned node r sin venstre side
-            while (r.venstre != null) {
+            while (r.venstre != null) { // traverser ned node r sin venstre side
 
                 s = r;    // s er forelder til r
                 r = r.venstre;
@@ -207,19 +194,18 @@ public class EksamenSBinTre<T> {
 
             p.verdi = r.verdi;   // kopierer verdien i r til p
 
-            // foreldre noden til r.høyre node for referansen til node s
-            if (r.høyre != null) {
+
+            if (r.høyre != null) { // foreldre noden til r.høyre node for referansen til node s
                 r.høyre.forelder = s;
             }
 
-            // Hvis s ikke peker på p så er sin venstre peker over til r sitt høyre barn
-            if (s != p) {
+
+            if (s != p) {   // Hvis s ikke peker på p så er sin venstre peker over til r sitt høyre barn
                 s.venstre = r.høyre;
 
-                //Eller hvis s peker på p så er foreldre noden s.høyre node verdi lik node r.høyre sin verdi
-            } else {
-                s.høyre = r.høyre; //
 
+            } else { // hvis s peker på p så er foreldre noden s.høyre node verdi lik node r.høyre sin verdi
+                s.høyre = r.høyre; //
 
             }
         }
@@ -252,44 +238,38 @@ public class EksamenSBinTre<T> {
     public int antall(T verdi) {
         //Har tatt ibruk programkode - oppgave 5.2.6 oppgave 2 fra kompendie.
 
-
         Node<T> p = rot; // P er rot noden
 
         int antallLike_NodeVerdier = 0; // Hjelpevariabel
 
         while (!(p == null)) {
-            int compare = comp.compare(verdi, p.verdi); //comparer verdi som sammenlinges med p nodens verdi
+            int compare = comp.compare(verdi, p.verdi); //comparerator som sammenlinger current verdi med p nodens verdi
 
-            //(compare value = -1), traverser og sammenling med verdier til venstre
-            if (compare < 0) {
+            if (compare < 0) { //(compare value = -1), traverser og sammenling med verdier til venstre
                 p = p.venstre;
 
-                //compare value = 1, traverserer og sammenling med verdier til høyre
-            } else if (compare > 0) {
+            } else if (compare > 0) {  //compare value = 1, traverserer og sammenling med verdier til høyre
                 p = p.høyre;
 
             } else { //(compare value = 0)
 
-                //plusser for hver node som har lik verdi
-                antallLike_NodeVerdier++;
+                antallLike_NodeVerdier++; //øker for hver node som har lik verdi
 
                 //setter like verdier til høyre for noden
                 p = p.høyre;
             }
         }
-        //returnere antall like forekomster av verdier i treet.
-        return antallLike_NodeVerdier;
+
+        return antallLike_NodeVerdier; //returnere antall like forekomster av verdier i treet.
     }
 
     public void nullstill() {
 
         //Har tatt utgangspunkt i programkode - oppgave 5 fra 5.2.8 fra kompendie for nulstill metoden
 
-
         Node<T> p = rot; //definerer rot noden lik node p
 
-        // kaller på metoden slett rekursivt hvis treet ikke er tomt
-        if (!tom()) {
+        if (!tom()) { // kaller på metoden slett rekursivt hvis treet ikke er tomt
             slett(p);
 
             rot = null; //setter rot noden sin verdi lik 0
@@ -301,13 +281,13 @@ public class EksamenSBinTre<T> {
 
     private static <T> void slett(Node<T> Node_p) {
 
-        //Høyre subtree blir fjernet fra rotnoden og setter p sin høyre node verdi her lik null
+        //Traverser høyre subtree og setter verdienene som er til høyre/venstre for rotnoden lik null
         if (Node_p.høyre != null) {
             slett(Node_p.høyre);
             Node_p.høyre = null;
         }
 
-        //venster subtree blir fjernet fra rotnoden og setter p sin sin venstre node verdi her lik null
+        //Traverser venstre subtree og sett verdienene som er til venstre for rotnoden lik null
         if (Node_p.venstre != null) {
             slett(Node_p.venstre);
             Node_p.venstre = null;
@@ -321,12 +301,10 @@ public class EksamenSBinTre<T> {
         //tatt utganspunkt i programkode 5.1.7 h) fra kompendie
 
 
-        // rot noden er null, som betyr at treet ikke eksisterer
-        if (p == null) {
+        if (p == null) { // rot noden er null, som betyr at treet ikke eksisterer
 
             throw new NoSuchElementException("Da er hele treet tomt");
         }
-
         while (true) {
 
             if (p.venstre != null) {
@@ -346,31 +324,25 @@ public class EksamenSBinTre<T> {
 
         //Tenker å ta ibruk fremgangsmåten for postorden fra kompendie under 5.1.7 h) - om postorden:
 
-        // parent noden er foreldre noden til p
-        Node<T> parent = p.forelder;
+        Node<T> parent = p.forelder; // parent noden er foreldre noden til p
 
-        //hvis p ikke har forelder så eksiterer ikke barne noden
-        if (p.forelder == null) {
+        if (p.forelder == null) { //hvis p ikke har forelder så eksiterer ikke barne noden
             p = null; //
 
-            // p er høyre barn til sin forelder
-        } else if (p == parent.høyre) {
+        } else if (p == parent.høyre) {  // p er høyre barn til sin forelder
             p = parent;
 
-            // p er venstre barn til foreldre noden
-        } else if (parent.venstre == p) {
+        } else if (parent.venstre == p) { // p er venstre barn til foreldre noden
 
-            // foreldre den neste node for p, Siden høyre noden for foreldre noden er tom
-            if (parent.høyre == null) {
-                p = parent; //
+            if (parent.høyre == null) { // foreldre den neste node for p, Siden høyre noden for foreldre noden er tom
+                p = parent;
 
-                //setter node p lik den neste noden i høyre subtreet for foreldrenoden i førstenpostoden
-            } else {
+            } else { //Hvis foreldre noden har en høyre node, så er den neste vi traverserer til altså noden som kommer først i postorden
                 p = førstePostorden(parent.høyre);
             }
+
         }
         return p;  //returner den neste noden i postorden
-
 
     }
 
@@ -378,16 +350,12 @@ public class EksamenSBinTre<T> {
 
         //tatt ibruk progrmakode 5.1.7 - oppgave 7
 
-        // finner den første noden p i postorden
-        Node<T> p = førstePostorden(rot);
+        Node<T> p = førstePostorden(rot);// finner den første noden p i postorden
 
         while (!(p == null)) {
 
-            //Kobler til interface og skrivet ut verdiene som blir traversert i postorden rekkefølge til skjerm
-            oppgave.utførOppgave(p.verdi);
+            oppgave.utførOppgave(p.verdi); //Kobler til interface og skrivet ut verdiene som blir traversert i postorden rekkefølge til skjerm
             p = nestePostorden(p); // nestePostorden returnere den noden som kommer etter p i postorden
-
-
         }
     }
 
@@ -398,14 +366,11 @@ public class EksamenSBinTre<T> {
     private void postordenRecursive(Node<T> p, Oppgave<? super T> oppgave) {
         // Tar ibruk programkode 5.1.7 a) fra kompendie
 
-
-        // sender verdiene til de nodene som blir traversert fra venstre subtree til oppgave interfacet
-        if (p.venstre != null) {
+        if (p.venstre != null) { // sender verdiene til de nodene som blir traversert fra venstre subtree til oppgave interfacet
             postordenRecursive(p.venstre, oppgave);
-
         }
-        //sender verdiene til de nodene som blir traversert videre til høyre subtree til oppgave interfacet
-        if (p.høyre != null) {
+
+        if (p.høyre != null) { //sender verdiene til de nodene som blir traversert videre til høyre subtree til oppgave interfacet
             postordenRecursive(p.høyre, oppgave);
 
         }
@@ -428,26 +393,21 @@ public class EksamenSBinTre<T> {
             Node<T> p = queue.remove();             // tar ut verdiene fra køen
             verdier_til_Liste.add(p.verdi);         //legger inn verdiene i arraylisten
 
-            //legger inn verdi for nodene som blir traversert i venstre subtree hvis venstre p.node ikke er null
-            if (p.venstre != null) {
+            if (p.venstre != null) { //legger inn verdi for nodene som blir traversert i venstre subtree hvis venstre p.node ikke er null
                 queue.add(p.venstre);
             }
 
-            //legger inn verdi for nodene som blir traversert i høyre subtree hvis høyre p.node ikke er null
-            if (p.høyre != null) {
+            if (p.høyre != null) { //legger inn verdi for nodene som blir traversert i høyre subtree hvis høyre p.node ikke er null
                 queue.add(p.høyre);
             }
         }
-
         return verdier_til_Liste; //returner verdiene i alle nodene i nivå orden til arraylisten
 
     }
 
-
     static <K> EksamenSBinTre<K> deserialize(ArrayList<K> data, Comparator<? super K> c) {
 
         //har tatt ibruk programkode 5.2.3 c fra kompendie
-
         {
             EksamenSBinTre<K> tre = new EksamenSBinTre<>(c); //Tar ibruk EksamenSBinTre som Constructior
             data.forEach(tre::leggInn);   //bygger opp et tre
