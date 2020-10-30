@@ -14,7 +14,7 @@ Se oblig-tekst for alle krav, og husk spesielt på følgende:
 
 # Beskrivelse av oppgaveløsning (4-8 linjer/setninger per oppgave)
 
-jeg har brukt git til å dokumentere arbeidet mitt. Jeg har 59 commits totalt, og hver logg-melding beskriver det jeg har gjort av endringer.
+jeg har brukt git til å dokumentere arbeidet mitt. Jeg har 60 commits totalt, og hver logg-melding beskriver det jeg har gjort av endringer.
 Jeg har lagret den opprinnelige kildekoden ved bruk av github detoskope og pushet inn. 
 
 **(Viktig!!!) - Min Hoved-branch heter ("Main") og ikke ("Master") på github detoskope.**
