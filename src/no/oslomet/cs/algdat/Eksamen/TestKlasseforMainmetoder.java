@@ -55,6 +55,8 @@ public class TestKlasseforMainmetoder {
 
  */
 
+
+        /*
         // tester for oppgave 6
 
         int[] a = {4, 7, 2, 9, 4, 10, 8, 7, 4, 6, 1};
@@ -71,5 +73,7 @@ public class TestKlasseforMainmetoder {
         // OBS: Hvis du ikke har gjort oppgave 4 kan du her bruke toString()
 
 
+
+         */
     }
 }
